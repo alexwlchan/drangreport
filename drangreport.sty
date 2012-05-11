@@ -1,18 +1,32 @@
 \NeedsTeXFormat{LaTeX2e}[1996/06/01]
-\ProvidesPackage{drangreport}[2011/05/25 v1.0 drdrang]
+\ProvidesPackage{drangreport}[2012/05/12 v1.1 alexwlchan]
 \typeout{Package: `drangreport'}
 %
 % Items that must be customized for your company and computer are denoted
 % with a *****CUSTOMIZE***** comment.
 %
 % Include some useful standard packages
-\RequirePackage{ifthen,graphicx,float}
+\RequirePackage{ifthen,graphicx,float,hyperref,color}
+%
+% Get the nice d-bend symbol for warnings
+\RequirePackage{manfnt}
+%
+% Defines a counter to keep track of lecture numbers
+% I think it's this early because it conflicts with amsmath
+% But I can't remember why
+\newcounter{lecture}
 %
 % Define a set of useful symbols
-\RequirePackage{drangsymbols}
+\RequirePackage{amsmath,drangsymbols,units,commath}
 %
 % Include a package I stole from Jakob Schiotz
 \RequirePackage{tweaklist}
+%
+% Defines the dcases environment
+\RequirePackage{mathtools}
+%
+% Includes the table decorations that I like
+\RequirePackage{booktabs,multirow}
 %
 % Items for handling options
 \newcounter{fontset}
@@ -56,8 +70,8 @@
 \DeclareOption{times}{%
   \setcounter{fontset}{1}%        Times fontset with Helvetica headings
 }
-\DeclareOption{palatino}{%
-  \setcounter{fontset}{2}%        Palatino fontset
+\DeclareOption{lyonmeta}{%
+  \setcounter{fontset}{2}%        Lyon fontset with Ideal Sans headings
 }
 \DeclareOption{timesopt}{%
   \setcounter{fontset}{3}%        Times fontset with Optima headings
@@ -80,37 +94,84 @@
   \renewcommand{\logolength}{.25in}%
 }
 %
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\DeclareOption{examples}{%
+  \renewcommand{\labelenumi}{\arabic{enumi}.}
+  \renewcommand{\labelenumii}{(\roman{enumii})}
+}
+
 \ExecuteOptions{logo, cm}
 \ProcessOptions
 %
 % Handle the fontset option.
 %
-\ifthenelse{\value{fontset}=1}{%
+
+\RequirePackage{framed}
+\RequirePackage{todonotes}
+
+\ifthenelse{\value{fontset}=0}{%
+  \renewcommand{\titlefamily}{\sffamily}
+}{\ifthenelse{\value{fontset}=1}{%
   \RequirePackage{wrisym}%
   \renewcommand{\titlefamily}{\sffamily}%   sans serif titles
 }{%
   \ifthenelse{\value{fontset}=2}{%
-    \RequirePackage{paloptima}%
-    \RequirePackage{eulernum}%
-    \renewcommand{\titlefamily}{\sffamily}% sans serif titles
-    \renewcommand{\baselinestretch}{1.1}%   Palatino looks cramped otherwise
+  \RequireXeTeX
+  \usepackage{mathspec}
+
+  \setmainfont[Ligatures=TeX]{Lyon}
+
+  \setmathsfont(Latin,Digits)[Scale=MatchLowercase]{Lyon}
+  
+  \setmathsfont(Greek)[Scale=MatchLowercase]{Gentium Plus}
+  
+  \setromanfont[Ligatures=TeX]{Lyon}
+  
+  \setallsansfonts{Proxima Nova}
+  \setallmonofonts{Consolas for BBEdit}
+  
+  \setmathrm[Ligatures=TeX]{Lyon}
+  
+  \renewcommand{\titlefamily}{\sffamily}
  }{%
     \ifthenelse{\value{fontset}=3}{%
-      \RequirePackage{tocw}%
-      \renewcommand{\titlefamily}{\sffamily}%  sans serif titles
+    % \RequirePackage{wrisym}
+	  \renewcommand{\rmdefault}{ptm}
+	  % \usepackage[varg]{txfonts}
+	  \RequirePackage{mathptmx}
+	  
+	  \renewcommand{\sfdefault}{uop}
+	  \renewcommand{\titlefamily}{\sffamily}%  sans serif titles
+	  % \usepackage{sectsty}
+	  % 	  \allsectionsfont{\sffamily}
   }{%
     \renewcommand{\titlefamily}{}%         serif titles
    }
   }
  }
+}
 %
 % No extra space after sentence ends.
-\frenchspacing
+% \frenchspacing
 %
-% We're going to have a half-line space between each paragraph and no
-% paragraph indentation.
+% We're going to have a half-line space between each paragraph and
+% no paragraph indentation.
 \setlength{\parskip}{.5\baselineskip}
 \setlength{\parindent}{0pt}
+%
+% Make sure it doesn't screw up the table of contents
+\newcommand{\TableofContents}{
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{0pt}
+\tableofcontents
+\setlength{\parskip}{.5\baselineskip}
+\setlength{\parindent}{0pt}}
+%
+% This ensures that I don't get a page number in the central footer of the titlepage
+\newcommand{\MakeTitle}{
+\maketitle
+\thispagestyle{empty}}
 %
 % The spacing between list items will be the same as the spacing
 % between paragraphs.
@@ -206,7 +267,7 @@
 %
 % I am the default author.
 % *****CUSTOMIZE*****
-\renewcommand{\@author}{Dr. Drang, Ph.D., P.E.}
+\renewcommand{\@author}{Alex Chan}
 %
 % Add a \client command that is similar to \author.
 \newcommand{\client}[1]{\newcommand{\@client}{#1}}
@@ -218,13 +279,13 @@
     \renewcommand*{\@oddfoot}{}%
     \renewcommand*{\@evenfoot}{}%
     \renewcommand*{\@oddhead}{\normalfont\normalsize\hfill\thepage}%
-    \renewcommand*{\@evenhead}{\normalfont\normalsize\thepage\hfill{\slshape\MakeUppercase{\@shorttitle}}}%
+    \renewcommand*{\@evenhead}{\normalfont\normalsize\thepage\hfill{\itshape\MakeUppercase{\@shorttitle}}}%
   }%
 }{%
   \renewcommand{\ps@headings}{%
     \renewcommand*{\@oddfoot}{}%
     \renewcommand*{\@evenfoot}{}%
-    \renewcommand*{\@oddhead}{\normalfont\normalsize{\slshape\MakeUppercase{\@shorttitle}}\hfill\thepage}%
+    \renewcommand*{\@oddhead}{\normalfont\normalsize{\itshape\MakeUppercase{\@shorttitle}}\hfill\thepage}%
     \renewcommand*{\@evenhead}{\@oddhead}%
   }%
 }
@@ -283,7 +344,7 @@
     \begin{center}
       \begin{tabular}[t]{c}
         \parbox[c][1in][c]{5in}
-          {\centering\normalfont\titlefamily\bfseries\LARGE\@title}\\
+          {\centering\normalfont\titlefamily\bfseries\Huge\@title}\\
         \begin{minipage}{5in}
           \begin{center}
             \normalfont\normalsize%
@@ -300,7 +361,7 @@
           {\showlogo}\\
       \end{tabular}
     \end{center}
-    %\thispagestyle{plain}%      no header on 1st page
+    \thispagestyle{plain}%      no header on 1st page
   }
 }
 %
@@ -342,7 +403,7 @@
   \flushleft\normalfont\normalsize#1\par
   \hspace{-.1in}\includegraphics{/Users/drang/graphics/sig.pdf}\\
   \vspace{-.3in}\rule{2.5in}{.5bp}\\
-  Dr. Drang, Ph.D., P.E.
+  Alex Chan
 }
 %
 % Define a float for plates. These are taken directly from the
@@ -402,4 +463,52 @@
   \newcommand\platename{Plate}
 }
 %
+% All of my stuff for keeping track of lectures
+\newcommand{\sektion}[1]{\newpage \section{#1} \gdef\sectitle{#1}
+						 \setcounter{footnote}{0}}
+\newcommand{\subsektion}[1]{\subsection*{#1}
+							\addcontentsline{toc}{subsection}{#1}}
+\newcommand{\sekktion}[2]{\newpage \section*{#2} \gdef\sectitle{#2}
+						  \addcontentsline{toc}{section}{#1}
+						  \setcounter{footnote}{0}}
+\newcommand{\subsekktion}[2]{\subsection*{#2}
+							 \addcontentsline{toc}{subsection}{#1}}
+\newcommand\sectitle{}		% This is the empty section title, before any section title is set
+\setcounter{lecture}{0}
 %
+\renewcommand{\thelecture}{\arabic{lecture}}
+\renewcommand{\theequation}{\thelecture.\arabic{equation}}
+%
+% Make the equation counter reset each lecture
+\makeatletter
+	\@addtoreset{equation}{lecture}
+\makeatother
+%
+% drangreport gets all upset if I don't put this right at the end
+%
+\RequirePackage[all]{xy}	% Include XY-pic
+	\SelectTips{cm}{10}		% Use the nicer arrowheads
+	\everyxy={<2.5em,0em>:}	% Sets the scale I like
+	\xyoption{web}			% Include the lattice feature, I don't know why it isn't loaded already
+%
+
+%
+\RequirePackage{pgf,tikz}
+\usetikzlibrary{arrows,
+				automata,
+				positioning,
+				decorations.markings,
+				shapes.arrows,
+				patterns,
+				decorations.pathmorphing,
+				calc}
+% \tikzset{
+%     state/.style={
+%            rectangle,
+%            rounded corners,
+%            draw=black, very thick,
+%            minimum height=2em,
+%            inner sep=2pt,
+%            text centered,
+%            },
+\NeedsTeXFormat{LaTeX2e}[1996/06/01]
