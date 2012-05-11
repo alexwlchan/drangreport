@@ -1,9 +1,55 @@
 \NeedsTeXFormat{LaTeX2e}[1996/06/01]
-\ProvidesPackage{unisymbols}[2011/05/25 v1.1 drdrang]
 
-% Redefine \in to refer to inch marks, \isin to refer to the old \in
+% Last edited 26 February, 2012 by A. Chan
+
+\ProvidesPackage{drangsymbols}[2012/05/12 v1.2 alexwlchan]
+
+\RequirePackage{amsthm}
+\RequirePackage{ifthen}
+
+\theoremstyle{plain}
+\newtheorem{theorem}[equation]{Theorem}
+\newtheorem*{claim}{Claim}
+\newtheorem*{aim}{Aim}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{lemma}[equation]{Lemma}
+\newtheorem{corollary}[equation]{Corollary}
+\newtheorem{proposition}[equation]{Proposition}
+\newtheorem{axiom}[equation]{Axiom}
+\newtheorem{task}{Task}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+\newtheorem*{openproblem}{Open problem}
+\newtheorem{exercise}{$\blacktriangleright$
+         				   \hypertarget{Ex\theexercise}{Exercise}}[lecture]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{proof*}{Proof}
+\newtheorem*{remarks}{Remarks}
+\newtheorem*{note}{Note}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+
+% Solutions
+\RequirePackage{answers}
+\Newassociation{solution}{Solution}{exSolutions}
+\renewenvironment{Solution}[1]{%\small%
+	\begin{trivlist} \item \textit{Solution}~#1.}{%
+	\hspace*{\fill} $\blacksquare$\end{trivlist}}
+
+% Warnings
+\newenvironment{warning}{%
+	\begin{trivlist} \item[] \noindent%
+	\begingroup\hangindent=2pc\hangafter=-2
+	\clubpenalty=10000%
+	\hbox to0pt{\hskip-\hangindent\dbend\hfill}\ignorespaces
+	\textit{Warning}.}%
+	{\endgraf\endgroup\end{trivlist}}
+
 \newcommand{\isin}{\ensuremath{\in}}
-\renewcommand{\in}{\ensuremath{{}^{\prime\prime}}}
+\newcommand{\inch}{\ensuremath{{}^{\prime\prime}}}
 \newcommand{\ft}{\ensuremath{{}^\prime}}
 \newcommand{\by}{\ensuremath{\!\times\!}}
 \newcommand{\degrees}{\ensuremath{{}^\circ}}
@@ -25,3 +71,99 @@
          /\kern-.1em
           \hbox{\mbox{\fontsize\sf@size\z@
                             \selectfont#2}}}}
+
+\RequirePackage{amssymb,fakeMnSymbol}
+
+\newcommand{\disp}{\displaystyle}
+
+\newcommand{\dlim}{\displaystyle\lim}
+\newcommand{\del}{\partial}
+\newcommand{\Del}{\nabla}
+
+\newcommand{\powerset}{\MNSpowerset}
+
+\renewcommand{\bf}[1]{\ensuremath{\mathbf{#1}}}
+\renewcommand{\sf}[1]{\ensuremath{\mathsf{#1}}}
+\renewcommand{\rm}[1]{\ensuremath{\mathrm{#1}}}
+\renewcommand{\cal}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand{\bb}[1]{\ensuremath{\mathbb{#1}}}
+\renewcommand{\bold}[1]{\ensuremath{\boldsymbol{#1}}}
+\renewcommand{\frak}[1]{\ensuremath{\mathfrak{#1}}}
+
+\renewcommand{\d}{\dif}
+
+\newcommand{\N}{\bb{N}}
+\newcommand{\Z}{\bb{Z}}
+\newcommand{\Q}{\bb{Q}}
+\newcommand{\R}{\bb{R}}
+\renewcommand{\C}{\bb{C}}
+\newcommand{\F}{\bb{F}}
+
+\newcommand{\Rm}{\bb{R}^m}
+\newcommand{\Rn}{\bb{R}^n}
+\newcommand{\Cn}{\bb{C}^n}
+\newcommand{\Fm}{\bb{F}^m}
+\newcommand{\Fn}{\bb{F}^n}
+
+\newcommand{\iN}{\in\bb{N}}
+\newcommand{\iZ}{\in\bb{Z}}
+\newcommand{\iQ}{\in\bb{Q}}
+\newcommand{\iR}{\in\bb{R}}
+\newcommand{\iRn}{\in\bb{R}^n}
+\newcommand{\iRm}{\in\bb{R}^m}
+\newcommand{\iC}{\in\bb{C}}
+\newcommand{\iF}{\in\bb{F}}
+
+\DeclareMathOperator*{\Tr}{Tr}
+\DeclareMathOperator*{\rank}{rank}
+\DeclareMathOperator*{\sgn}{sgn}
+\DeclareMathOperator*{\Sym}{Sym}
+\DeclareMathOperator*{\hcf}{hcf}
+\DeclareMathOperator*{\lcm}{lcm}
+\DeclareMathOperator*{\id}{id}
+\DeclareMathOperator*{\Curl}{curl}
+\DeclareMathOperator*{\Grad}{grad}
+\DeclareMathOperator*{\Div}{div}
+
+\DeclareMathOperator*{\sech}{sech}
+\DeclareMathOperator*{\cosech}{cosech}
+\DeclareMathOperator*{\cosec}{cosec}
+
+\newcommand{\grad}{\bold{\nabla}}
+\newcommand{\cross}{\times}
+
+\newcommand{\f}[2]{\frac{#1}{#2}}
+\newcommand{\df}[2]{\displaystyle\frac{#1}{#2}}
+\newcommand{\dy}[2]{\od{#1}{#2}}
+\newcommand{\ddy}[2]{\od[2]{#1}{#2}}
+\newcommand{\pa}[2]{\pd{#1}{#2}}
+\newcommand{\pab}[3]{\md{2}{#1}{1}{#2}{1}{#3}}
+\newcommand{\ppa}[2]{\pd[2]{#1}{#2}}
+\newcommand{\mat}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+\newcommand{\vmat}[1]{\begin{vmatrix} #1 \end{vmatrix}}
+
+% Group operators
+
+\DeclareMathOperator*{\stab}{stab}
+\DeclareMathOperator*{\ccl}{ccl}
+\DeclareMathOperator*{\orb}{orb}
+\newcommand{\centra}{\cal{Z}}
+\newcommand{\centre}{\cal{Z}}
+\newcommand{\GL}{\rm{GL}}
+\newcommand{\SL}{\rm{SL}}
+\newcommand{\SO}{\rm{SO}}
+
+% Setup the matha font (from mathabx.sty)
+\DeclareFontFamily{U}{matha}{\hyphenchar\font45}
+\DeclareFontShape{U}{matha}{m}{n}{
+      <5> <6> <7> <8> <9> <10> gen * matha
+      <10.95> matha10 <12> <14.4> <17.28> <20.74> <24.88> matha12
+      }{}
+\DeclareSymbolFont{matha}{U}{matha}{m}{n}
+
+% Define a subset character from that font (from mathabx.dcl) to completely replace the \subset character, you can replace \varsubset with \subset
+\DeclareMathSymbol{\notdivides}{3}{matha}{"1F}
+\DeclareMathSymbol{\divides}{3}{matha}{"17}
+
+% Alex's shortcuts
+\NeedsTeXFormat{LaTeX2e}[1996/06/01]
