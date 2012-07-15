@@ -1,11 +1,38 @@
 \NeedsTeXFormat{LaTeX2e}[1996/06/01]
 
-% Last edited 26 February, 2012 by A. Chan
+% Last edited 15 July, 2012 by A. Chan
 
-\ProvidesPackage{drangsymbols}[2012/05/12 v1.2 alexwlchan]
+\ProvidesPackage{drangsymbols}[2012/07/15 v1.3 alexwlchan]
 
 \RequirePackage{amsthm}
-\RequirePackage{ifthen}
+
+\begingroup
+    \makeatletter
+    \@for\theoremstyle:=definition,remark,plain\do{%
+        \expandafter\g@addto@macro\csname th@\theoremstyle\endcsname{%
+            \setlength\thm@postskip{0pt}
+            }%
+        }
+\endgroup
+
+% \begingroup
+%     \makeatletter
+%     \@for\theoremstyle:=proof\do{%
+%         \expandafter\g@addto@macro\csname th@\theoremstyle\endcsname{%
+%             \setlength\thm@preskip{0pt}
+% 			\setlength\thm@postskip{0pt}
+%             }%
+%         }
+% \endgroup
+
+\begingroup
+    \makeatletter
+    \@for\theoremstyle:=remark\do{%
+        \expandafter\g@addto@macro\csname th@\theoremstyle\endcsname{%
+            \setlength\thm@preskip\parskip
+            }%
+        }
+\endgroup
 
 \theoremstyle{plain}
 \newtheorem{theorem}[equation]{Theorem}
@@ -16,13 +43,14 @@
 \newtheorem{corollary}[equation]{Corollary}
 \newtheorem{proposition}[equation]{Proposition}
 \newtheorem{axiom}[equation]{Axiom}
+\newtheorem{assertion}[equation]{Assertion}
 \newtheorem{task}{Task}
 
 \theoremstyle{definition}
 \newtheorem*{definition}{Definition}
 \newtheorem*{openproblem}{Open problem}
 \newtheorem{exercise}{$\blacktriangleright$
-         				   \hypertarget{Ex\theexercise}{Exercise}}[lecture]
+					   \hypertarget{Ex\theexercise}{Exercise}}[lecture]
 
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
@@ -87,6 +115,8 @@
 \renewcommand{\rm}[1]{\ensuremath{\mathrm{#1}}}
 \renewcommand{\cal}[1]{\ensuremath{\mathcal{#1}}}
 \newcommand{\bb}[1]{\ensuremath{\mathbb{#1}}}
+\renewcommand{\tt}[1]{\ensuremath{\mathtt{#1}}}
+\newcommand{\mono}[1]{{\small\texttt{#1}}}
 \renewcommand{\bold}[1]{\ensuremath{\boldsymbol{#1}}}
 \renewcommand{\frak}[1]{\ensuremath{\mathfrak{#1}}}
 
@@ -133,7 +163,8 @@
 \newcommand{\cross}{\times}
 
 \newcommand{\f}[2]{\frac{#1}{#2}}
-\newcommand{\df}[2]{\displaystyle\frac{#1}{#2}}
+\newcommand{\df}[2]{\dfrac{#1}{#2}}
+\newcommand{\tf}[2]{\textstyle\frac{#1}{#2}}
 \newcommand{\dy}[2]{\od{#1}{#2}}
 \newcommand{\ddy}[2]{\od[2]{#1}{#2}}
 \newcommand{\pa}[2]{\pd{#1}{#2}}
@@ -142,11 +173,40 @@
 \newcommand{\mat}[1]{\begin{pmatrix} #1 \end{pmatrix}}
 \newcommand{\vmat}[1]{\begin{vmatrix} #1 \end{vmatrix}}
 
+\newcommand{\wiki}[2]{\href{http://en.wikipedia.org/wiki/#1}{\emph{#2}}}
+\newcommand{\wikirm}[2]{\href{http://en.wikipedia.org/wiki/#1}{#2}}
+
 % Group operators
 
 \DeclareMathOperator*{\stab}{stab}
 \DeclareMathOperator*{\ccl}{ccl}
 \DeclareMathOperator*{\orb}{orb}
+
+% The slightly hacky optional arguments for Orb and Stab are taken from
+% http://www.hanskalabs.net/posts/latex-newcommand-optional-argument/
+
+\def\Orb#1{\def\tempa{#1}\futurelet\next\Orb@i}% Save first argument
+\def\Orb@i{\ifx\next\bgroup\expandafter\Orb@ii\else\expandafter\Orb@end\fi}%Check brace
+\def\Orb@ii#1{\textstyle\orb_{#1}(\tempa)}%Two args
+\def\Orb@end{\orb(\tempa)}%Single args
+
+\def\Stab#1{\def\tempa{#1}\futurelet\next\Stab@i}% Save first argument
+\def\Stab@i{\ifx\next\bgroup\expandafter\Stab@ii\else\expandafter\Stab@end\fi}%Check brace
+\def\Stab@ii#1{\textstyle\stab_{#1}(\tempa)}%Two args
+\def\Stab@end{\stab(\tempa)}%Single args
+
+\def\CCL#1{\def\tempa{#1}\futurelet\next\CCL@i}% Save first argument
+\def\CCL@i{\ifx\next\bgroup\expandafter\CCL@ii\else\expandafter\CCL@end\fi}%Check brace
+\def\CCL@ii#1{\textstyle\ccl_{#1}(\tempa)}%Two args
+\def\CCL@end{\ccl(\tempa)}%Single args
+
+\def\Centra#1{\def\tempa{#1}\futurelet\next\Centra@i}% Save first argument
+\def\Centra@i{\ifx\next\bgroup\expandafter\Centra@ii\else\expandafter\Centra@end\fi}%Check brace
+\def\Centra@ii#1{\cal{Z}_{#1}(\tempa)}%Two args
+\def\Centra@end{\cal{Z}(\tempa)}%Single args
+
+\newcommand{\Centre}[1]{\cal{Z}(#1)}
+
 \newcommand{\centra}{\cal{Z}}
 \newcommand{\centre}{\cal{Z}}
 \newcommand{\GL}{\rm{GL}}
@@ -165,5 +225,53 @@
 \DeclareMathSymbol{\notdivides}{3}{matha}{"1F}
 \DeclareMathSymbol{\divides}{3}{matha}{"17}
 
-% Alex's shortcuts
-\NeedsTeXFormat{LaTeX2e}[1996/06/01]
+% Some code for the titlepage
+% This takes the format {%part}{%term}{%course name}{%lecturer_initials}{%lecturer_surname}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\newcommand{\NotesTitle}[6]
+{\begin{center}
+
+\thispagestyle{empty}
+
+\textsc{\textcolor{white}{AAA}}\\[1.5cm]
+	{\large Part #1 of the Mathematical Tripos of}\\[0.1cm]
+	{\large the University of Cambridge}\\[0.5cm] % Major heading such as course name
+	{\large #2}\\[0.5cm] % Minor heading such as course title
+	
+	\HRule \\[0.4cm]
+	{\huge \sffamily\bfseries #3}\\[0.4cm] % Title of your document
+	\HRule \\[1.5cm]
+	
+	\begin{minipage}{0.4\textwidth}
+	\begin{flushleft} \large
+	\emph{Lectured by:}\\
+	#4~\textsc{#5} % Your name
+	\end{flushleft}
+	\end{minipage}
+	~
+	\begin{minipage}{0.4\textwidth}
+	\begin{flushright} \large
+	\emph{Notes by:} \\
+	Alex \textsc{Chan} % Supervisor's Name
+	\end{flushright}
+	\end{minipage}\vfill
+	
+	{\large Comments and corrections should be sent to \href{mailto:awlc2@cam.ac.uk}{awlc2@cam.ac.uk}.} \\[0.5cm] %
+	{\large This work is licensed under a \href{http://creativecommons.org/licenses/by-nc-sa/3.0/}{Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License}.} \\[0.5cm] %
+	{\large The following resources are \emph{not} endorsed by the University of Cambridge.} \\[0.5cm] %
+	{\large Last revised \today.}\\[3cm] %
+	
+	\vfill
+	\end{center}
+	
+		\pagebreak
+	
+	\thispagestyle{empty}
+	
+	#6
+	
+	\setcounter{page}{0}
+	
+	\newpage}
