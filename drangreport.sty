@@ -6,7 +6,9 @@
 % with a *****CUSTOMIZE***** comment.
 %
 % Include some useful standard packages
-\RequirePackage{ifthen,graphicx,float,hyperref,color}
+\RequirePackage{ifthen,graphicx,float,color,hyperref}
+\hypersetup{colorlinks=true}
+\usepackage[small]{caption}
 %
 % Get the nice d-bend symbol for warnings
 \RequirePackage{manfnt}
@@ -26,7 +28,7 @@
 \RequirePackage{mathtools}
 %
 % Includes the table decorations that I like
-\RequirePackage{booktabs,multirow}
+\RequirePackage{booktabs,multirow,eukdate}
 %
 % Items for handling options
 \newcounter{fontset}
@@ -38,7 +40,7 @@
 % get the logo to fit in the available space.
 % *****CUSTOMIZE*****
 \newcommand{\showlogo}{%
-  \centering\hspace{.25in}\includegraphics[scale=.65]{/Users/drang/graphics/logo.pdf}
+  \centering\hspace{.25in}\includegraphics[scale=.65]{/Users/alexwlchan/Dropbox/BATS/bat-large.pdf}
 }
 %
 % An option to the package determines the font set we're going to use.
@@ -46,29 +48,33 @@
 % standard LaTeX. The other three options are:
 %
 %   "times" (fontset 1)
-%     serif:      Times
-%     sans serif: Helvetica (used for section headings and titles)
+%     serif:      Caecilia
+%     sans serif: Proxima Nova (used for section headings and titles)
 %     typewriter: Courier
 %     math:       Mathematica
 %
 %   "palatino" (fontset 2)
-%     serif:      Palatino
-%     san serif:  Optima (used for section headings and titles)
-%     typewriter: Courier
-%     math:       Euler (with Palatino numerals)
+%     serif:      Lyon
+%     san serif:  Proxima Nova (used for section headings and titles)
+%     typewriter: Consolas for BBEdit
+%     math:       The standard LaTeX set (with Lyon numerals and text)
+%	  greek:	  Gentium Basic
 %
 %   "timesopt" (fontset 3)
 %     sans serif: Optima (used for section headings and titles)
 %     typewriter: Courier
 %     math:       Mathematica
 %
+%	"mathsiecat" (fontset 4)
+%	  sans serif: Edmonsans
+%
 % Obviously, these fonts must be available to your LaTeX system for these options to work.
 %
 \DeclareOption{cm}{%
   \setcounter{fontset}{0}%
 }
-\DeclareOption{times}{%
-  \setcounter{fontset}{1}%        Times fontset with Helvetica headings
+\DeclareOption{caecilia}{%
+  \setcounter{fontset}{1}%        Caecilia fontset with Proxima Nova headings
 }
 \DeclareOption{lyonmeta}{%
   \setcounter{fontset}{2}%        Lyon fontset with Ideal Sans headings
@@ -76,6 +82,10 @@
 \DeclareOption{timesopt}{%
   \setcounter{fontset}{3}%        Times fontset with Optima headings
 }
+\DeclareOption{mathsiecat}{%
+  \setcounter{fontset}{4}%        Times fontset with Optima headings
+}
+
 %
 % Another option to the package determines whether the company logo
 % appears on the title page. Normally the logo should appear, but 
@@ -83,7 +93,7 @@
 % *****CUSTOMIZE*****
 \DeclareOption{logo}{%
   \renewcommand{\showlogo}{%
-    \centering\hspace{.25in}\includegraphics[scale=.65]{/Users/drang/graphics/logo.pdf}
+    \centering\hspace{.25in}\includegraphics[scale=.65]{/Users/alexwlchan/Dropbox/BATS/bat-large.pdf}
   }%
   \renewcommand{\authorlength}{2in}%
   \renewcommand{\logolength}{1in}%
@@ -99,71 +109,163 @@
 \DeclareOption{examples}{%
   \renewcommand{\labelenumi}{\arabic{enumi}.}
   \renewcommand{\labelenumii}{(\roman{enumii})}
+  \renewcommand{\labelenumiii}{(\alph{enumiii})}
 }
 
-\ExecuteOptions{logo, cm}
+\DeclareOption{blacklinks}{\hypersetup{colorlinks=false}}
+
+\ExecuteOptions{nologo, cm}
 \ProcessOptions
 %
 % Handle the fontset option.
 %
+%
+% Set the side margins to 1.25 in. See Kopka & Daly C.3.1.
+% Placed before font options are executed to allow for wider margins in the mathsiecat option.
+\newlength{\uni@sidemargin}
+\setlength{\uni@sidemargin}{1.25in}
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-2\uni@sidemargin}
+\setlength{\oddsidemargin}{\uni@sidemargin}
+\addtolength{\oddsidemargin}{-1in}%         to account for TeX's automatic 1in
+\setlength{\evensidemargin}{\oddsidemargin}
+%
+
 
 \RequirePackage{framed}
 \RequirePackage{todonotes}
 
-\ifthenelse{\value{fontset}=0}{%
-  \renewcommand{\titlefamily}{\sffamily}
-}{\ifthenelse{\value{fontset}=1}{%
-  \RequirePackage{wrisym}%
-  \renewcommand{\titlefamily}{\sffamily}%   sans serif titles
-}{%
-  \ifthenelse{\value{fontset}=2}{%
-  \RequireXeTeX
-  \usepackage{mathspec}
-
-  \setmainfont[Ligatures=TeX]{Lyon}
-
-  \setmathsfont(Latin,Digits)[Scale=MatchLowercase]{Lyon}
-  
-  \setmathsfont(Greek)[Scale=MatchLowercase]{Gentium Plus}
-  
-  \setromanfont[Ligatures=TeX]{Lyon}
-  
-  \setallsansfonts{Proxima Nova}
-  \setallmonofonts{Consolas for BBEdit}
-  
-  \setmathrm[Ligatures=TeX]{Lyon}
-  
-  \renewcommand{\titlefamily}{\sffamily}
- }{%
-    \ifthenelse{\value{fontset}=3}{%
-    % \RequirePackage{wrisym}
-	  \renewcommand{\rmdefault}{ptm}
-	  % \usepackage[varg]{txfonts}
-	  \RequirePackage{mathptmx}
-	  
-	  \renewcommand{\sfdefault}{uop}
-	  \renewcommand{\titlefamily}{\sffamily}%  sans serif titles
-	  % \usepackage{sectsty}
-	  % 	  \allsectionsfont{\sffamily}
-  }{%
-    \renewcommand{\titlefamily}{}%         serif titles
+\ifthenelse{\value{fontset}=0}
+	{
+	 \renewcommand{\titlefamily}{\sffamily}
+	}
+	{
+	 \ifthenelse{\value{fontset}=1}{%
+	 \RequireXeTeX
+	 \usepackage{mathspec}
+	 
+	 \setmainfont[Ligatures=TeX]{Caecilia LT Std}
+	 \setmathsfont(Latin,Digits)[Scale=MatchLowercase]{Caecilia LT Std}
+	 \setmathsfont(Greek)[Scale=MatchLowercase]{Arev Sans}
+	 \setromanfont[Ligatures=TeX]{Caecilia LT Std}
+	 
+	 \setallsansfonts[Ligatures=TeX]{Caecilia LT Std}
+	 \setallmonofonts{Consolas for BBEdit}
+	 
+	 \setmathrm[Ligatures=TeX]{Caecilia LT Std}
+	 
+	 \usepackage{setspace}
+	 \linespread{1.15}
+	 
+	 \renewcommand{\titlefamily}{\sffamily}%   sans serif titles
+	}
+	{
+	 \ifthenelse{\value{fontset}=2}{%
+	 \RequireXeTeX
+	 \usepackage{mathspec}
+	 
+	 \setmainfont[Ligatures=TeX]{Lyon}
+	 
+	 \setmathsfont(Latin,Digits)[Scale=MatchLowercase]{Lyon} % Scale=MatchLowercase,
+	 
+	 % \setgreekfont[Scale=MatchLowercase]{Gentium Basic} %Scale=MatchLowercase,
+ 	 \setmathsfont(Greek)[Scale=MatchLowercase]{Gentium Basic} %Scale=MatchLowercase,
+	 % \setmathsfont(Greek)[Scale=MatchLowercase]{Times} %Scale=MatchLowercase,
+	 % \setmathsfont(Greek)
+	     % [Uppercase=Plain,Lowercase=Regular,Scale=MatchLowercase]
+	     % {GFS Porson}
+	 
+	 \setromanfont[Ligatures=TeX,Scale=MatchLowercase]{Lyon}
+	 
+	 \setsansfont[Ligatures=TeX,Scale=MatchLowercase]{Proxima Nova}
+	 \setallmonofonts[Scale=MatchLowercase]{Consolas for BBEdit}
+	 
+	 \setmathrm[Ligatures=TeX,Scale=MatchLowercase]{Lyon}
+	 
+	 \setminwhitespace[1250]
+	 
+	 \renewcommand{\titlefamily}{\sffamily}
+	 
+	 \newfontfamily{\ErdSubstFont}{Times}
+	 
+	 \XeTeXinterchartokenstate=1
+	 \newXeTeXintercharclass\ErdSubstFont
+	 
+	 \XeTeXcharclass"0151=\ErdSubstFont
+	 
+	 \XeTeXinterchartoks 0 \ErdSubstFont = {\begingroup\ErdSubstFont}
+	 \XeTeXinterchartoks 255 \ErdSubstFont = {\begingroup\ErdSubstFont}
+	 \XeTeXinterchartoks \ErdSubstFont 0 = {\endgroup}
+	 \XeTeXinterchartoks \ErdSubstFont 255 = {\endgroup}
+	}
+	{%
+	 \ifthenelse{\value{fontset}=3}{%
+	 % \RequirePackage{wrisym}
+	 \renewcommand{\rmdefault}{ptm}
+	 % \usepackage[varg]{txfonts}
+	 \RequirePackage{mathptmx}
+	 
+	 \renewcommand{\sfdefault}{uop}
+	 \renewcommand{\titlefamily}{\sffamily}%  sans serif titles
+	 % \usepackage{sectsty}
+	 % 	  \allsectionsfont{\sffamily}
+	}
+	{%
+	 \ifthenelse{\value{fontset}=4}{%
+	 
+	 \RequireXeTeX
+	 \usepackage{mathspec}
+	 
+	 \setmainfont[Ligatures=TeX]{Helvetica}
+	 
+	 \setmathsfont(Latin,Digits)[Scale=MatchLowercase]{Times} % Scale=MatchLowercase,
+	 
+	 \setmathsfont(Greek)[Scale=MatchLowercase]{Times} %Scale=MatchLowercase,
+	 
+	 \setromanfont[Ligatures=TeX]{Helvetica}
+	 
+	 \setsansfont[Ligatures=TeX]{Helvetica}
+	 \setallmonofonts{Consolas for BBEdit}
+	 
+	 \setmathrm[Ligatures=TeX,Scale=MatchLowercase]{Times}
+	 
+	 \setminwhitespace[1250]
+	 
+	 \usepackage{setspace}
+	 \setstretch{1.1}
+	 
+	 \setlength{\uni@sidemargin}{1.5in}
+	 \setlength{\textwidth}{\paperwidth}
+	 \addtolength{\textwidth}{-2\uni@sidemargin}
+	 \setlength{\oddsidemargin}{\uni@sidemargin}
+	 \addtolength{\oddsidemargin}{-1in}%         to account for TeX's automatic 1in
+	 \setlength{\evensidemargin}{\oddsidemargin}
+	 
+	 }
+ 	 {
+      \renewcommand{\sffamily}{}%         serif titles
+ 	 }
+	}
    }
   }
  }
-}
 %
 % No extra space after sentence ends.
 % \frenchspacing
+\raggedbottom
 %
 % We're going to have a half-line space between each paragraph and
 % no paragraph indentation.
-\setlength{\parskip}{.5\baselineskip}
+\setlength{\parskip}{.7\baselineskip}
 \setlength{\parindent}{0pt}
+%
+%
 %
 % Make sure it doesn't screw up the table of contents
 \newcommand{\TableofContents}{
 \setlength{\parskip}{0pt}
 \setlength{\parindent}{0pt}
+\thispagestyle{empty}
 \tableofcontents
 \setlength{\parskip}{.5\baselineskip}
 \setlength{\parindent}{0pt}}
@@ -211,17 +313,17 @@
   {0pt}%                            indent
   {-3.75ex plus -1ex minus -.2ex}%   pre-skip, next par not indented)
   {2.0ex plus .2ex}%                post-skip
-  {\normalfont\titlefamily\bfseries\Large}}
+  {\normalfont\titlefamily\bfseries\LARGE}}
 \renewcommand{\subsection}{\@startsection{subsection}{2}%
   {0pt}%                            indent
   {-2.5ex plus -1ex minus -.2ex}%  pre-skip, next par not indented)
   {1.25ex plus .2ex}%                post-skip
-  {\normalfont\titlefamily\bfseries\large}}
+  {\normalfont\titlefamily\bfseries\Large}}
 \renewcommand{\subsubsection}{\@startsection{subsubsection}{3}%
   {0pt}%                            indent
   {-1.25ex plus -1ex minus -.2ex}%  pre-skip, next par not indented)
   {.5ex plus .2ex}%                post-skip
-  {\normalfont\titlefamily\bfseries\normalsize}}
+  {\normalfont\titlefamily\bfseries\large}}
 \renewcommand{\paragraph}{\@startsection{paragraph}{4}%
   {0pt}%                            indent
   {-1.25ex plus -1ex minus -.2ex}%  pre-skip, next par not indented)
@@ -237,15 +339,6 @@
 % document has chapters, otherwise use the section font. These are
 % taken directly from the article and report classes, with only the
 % font stuff changed.
-%
-% Set the side margins to 1.25 in. See Kopka & Daly C.3.1.
-\newlength{\uni@sidemargin}
-\setlength{\uni@sidemargin}{1.25in}
-\setlength{\textwidth}{\paperwidth}
-\addtolength{\textwidth}{-2\uni@sidemargin}
-\setlength{\oddsidemargin}{\uni@sidemargin}
-\addtolength{\oddsidemargin}{-1in}%         to account for TeX's automatic 1in
-\setlength{\evensidemargin}{\oddsidemargin}
 %
 % Set the header .5in from top of paper, the footer .5in from bottom
 % of paper, and the top & bottom body margins at 1in. See Kopka &
@@ -278,14 +371,18 @@
   \renewcommand{\ps@headings}{%
     \renewcommand*{\@oddfoot}{}%
     \renewcommand*{\@evenfoot}{}%
-    \renewcommand*{\@oddhead}{\normalfont\normalsize\hfill\thepage}%
-    \renewcommand*{\@evenhead}{\normalfont\normalsize\thepage\hfill{\itshape\MakeUppercase{\@shorttitle}}}%
+	\renewcommand*{\@oddhead}{\hfill\small\sffamily{%\itshape{\@section} $\vert$ 
+		\bfseries{\thepage}}} %
+	\renewcommand*{\@evenhead}{\small\sffamily{{\bfseries{\thepage}} $\vert$ {\itshape{\@shorttitle}} \hfill}} %
+    % \renewcommand*{\@oddhead}{\normalfont\normalsize\hfill\thepage}%
+    % \renewcommand*{\@evenhead}{\normalfont\normalsize\thepage\hfill{\itshape\MakeUppercase{\@shorttitle}}}%
   }%
 }{%
   \renewcommand{\ps@headings}{%
     \renewcommand*{\@oddfoot}{}%
     \renewcommand*{\@evenfoot}{}%
-    \renewcommand*{\@oddhead}{\normalfont\normalsize{\itshape\MakeUppercase{\@shorttitle}}\hfill\thepage}%
+    % \renewcommand*{\@oddhead}{\normalfont\normalsize{\itshape\MakeUppercase{\@shorttitle}}\hfill\thepage}%
+	\renewcommand*{\@oddhead}{\hfill\small\sffamily{{\itshape{\@shorttitle}} $\vert$ \bfseries{\thepage}}}
     \renewcommand*{\@evenhead}{\@oddhead}%
   }%
 }
@@ -302,10 +399,11 @@
       {\end{tabular} \begin{tabular}[t]{c}\vspace{.5ex}\\}
     \begin{titlepage}
       \begin{center}
-        \begin{tabular}[t]{c}
+        \begin{tabular}[t]{p{8cm}}
           \parbox[c][1in][c]{5in}{\hfill}\\
           \parbox[c][2in][c]{5in}
-            {\centering\normalfont\titlefamily\bfseries\Huge\@title}\\
+            {\centering\normalfont\titlefamily\bfseries\Huge\@title} \\
+			{\centering\normalfont\titlefamily\bfseries\Large\@subtitle} \\
           \begin{minipage}[c][\authorlength][c]{5in}
             {\begin{center}%
               \normalfont\normalsize%
@@ -344,7 +442,8 @@
     \begin{center}
       \begin{tabular}[t]{c}
         \parbox[c][1in][c]{5in}
-          {\centering\normalfont\titlefamily\bfseries\Huge\@title}\\
+          {\centering\normalfont\titlefamily\bfseries\Huge\@title} \\
+		  {\centering\normalfont\titlefamily\bfseries\Large\@subtitle} \\
         \begin{minipage}{5in}
           \begin{center}
             \normalfont\normalsize%
@@ -361,7 +460,7 @@
           {\showlogo}\\
       \end{tabular}
     \end{center}
-    \thispagestyle{plain}%      no header on 1st page
+    \thispagestyle{empty}%      no header on 1st page
   }
 }
 %
@@ -464,7 +563,7 @@
 }
 %
 % All of my stuff for keeping track of lectures
-\newcommand{\sektion}[1]{\newpage \section{#1} \gdef\sectitle{#1}
+\newcommand{\sektion}[1]{\cleardoublepage \section{#1} \gdef\sectitle{#1}
 						 \setcounter{footnote}{0}}
 \newcommand{\subsektion}[1]{\subsection*{#1}
 							\addcontentsline{toc}{subsection}{#1}}
@@ -486,22 +585,22 @@
 %
 % drangreport gets all upset if I don't put this right at the end
 %
-\RequirePackage[all]{xy}	% Include XY-pic
+\RequirePackage[color,all]{xy}	% Include XY-pic
 	\SelectTips{cm}{10}		% Use the nicer arrowheads
 	\everyxy={<2.5em,0em>:}	% Sets the scale I like
 	\xyoption{web}			% Include the lattice feature, I don't know why it isn't loaded already
 %
 
 %
-\RequirePackage{pgf,tikz}
-\usetikzlibrary{arrows,
-				automata,
-				positioning,
-				decorations.markings,
-				shapes.arrows,
-				patterns,
-				decorations.pathmorphing,
-				calc}
+% \RequirePackage{pgf,tikz}
+% \usetikzlibrary{arrows,
+% 				automata,
+% 				positioning,
+% 				decorations.markings,
+% 				shapes.arrows,
+% 				patterns,
+% 				decorations.pathmorphing,
+% 				calc}
 % \tikzset{
 %     state/.style={
 %            rectangle,
@@ -511,4 +610,4 @@
 %            inner sep=2pt,
 %            text centered,
 %            },
-\NeedsTeXFormat{LaTeX2e}[1996/06/01]
+% }
