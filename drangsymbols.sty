@@ -112,6 +112,26 @@
   {\bfseries{Examples~\theequation}} (#1){\bfseries{.}}\relax%
 }}{\end{mdframed}}
 
+\newenvironment{exercise}[1][]{%
+ \stepcounter{equation}%
+  \ifstrempty{#1}%
+  {\begin{mdframed}[style=lemma]
+  {\bfseries{Exercise~\theequation.}}
+  \relax}
+  {\begin{mdframed}[style=lemma]
+  {\bfseries{Exercise~\theequation}} (#1){\bfseries{.}}\relax%
+}}{\end{mdframed}}
+
+\newenvironment{exercises}[1][]{%
+ \stepcounter{equation}%
+  \ifstrempty{#1}%
+  {\begin{mdframed}[style=lemma]
+  {\bfseries{Exercises~\theequation.}}
+  \relax}
+  {\begin{mdframed}[style=lemma]
+  {\bfseries{Exercises~\theequation}} (#1){\bfseries{.}}\relax%
+}}{\end{mdframed}}
+
 \newenvironment{proposition}[1][]{%
  \stepcounter{equation}%
   \ifstrempty{#1}%
@@ -279,6 +299,16 @@
 \newcommand{\vvert}[1]{\left\vert #1 \right\vert}
 \newcommand{\VVert}[1]{\left\Vert #1 \right\Vert}
 
+\newcommand{\isom}{\cong}
+\newcommand{\isomto}{\xrightarrow{\sim}}
+\newcommand{\isomfrom}{\xleftarrow{\sim}}
+
+\newcommand{\surjto}{\twoheadrightarrow}
+\newcommand{\surjfrom}{\twoheadleftarrow}
+
+\newcommand{\injto}{\hookrightarrow}
+\newcommand{\injfrom}{\hookrightarrow}
+
 % Group operators
 
 \DeclareMathOperator*{\stab}{stab}
@@ -312,11 +342,13 @@
 
 \newcommand{\centra}{\cal{Z}}
 \newcommand{\centre}{\cal{Z}}
-\newcommand{\GL}{\rm{GL}}
-\newcommand{\SL}{\rm{SL}}
-\newcommand{\SO}{\rm{SO}}
+\newcommand{\GL}{\text{GL}}
+\newcommand{\SL}{\text{SL}}
+\newcommand{\SO}{\text{SO}}
 
 \newcommand{\Trans}{{\sf{T}}}
+
+\newcommand{\qend}{\hfill $\blacksquare$}
 
 % Setup the matha font (from mathabx.sty)
 \DeclareFontFamily{U}{matha}{\hyphenchar\font45}

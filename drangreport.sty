@@ -107,12 +107,14 @@
 \renewcommand{\labelenumi}{(\roman{enumi})}
 
 \DeclareOption{examples}{%
-  \renewcommand{\labelenumi}{\arabic{enumi}.}
+  \renewcommand{\labelenumi}{\bfseries\sffamily{\arabic{enumi}.}}
   \renewcommand{\labelenumii}{(\roman{enumii})}
   \renewcommand{\labelenumiii}{(\alph{enumiii})}
 }
 
-\DeclareOption{blacklinks}{\hypersetup{colorlinks=false}}
+\DeclareOption{blacklinks}{
+  \hypersetup{colorlinks=false}
+}
 
 \ExecuteOptions{nologo, cm}
 \ProcessOptions
