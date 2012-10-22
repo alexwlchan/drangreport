@@ -132,6 +132,9 @@
   {\bfseries{Exercises~\theequation}} (#1){\bfseries{.}}\relax%
 }}{\end{mdframed}}
 
+\newenvironment{question}[1][]{%
+ \item #1}
+
 \newenvironment{proposition}[1][]{%
  \stepcounter{equation}%
   \ifstrempty{#1}%
