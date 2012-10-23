@@ -1,48 +1,58 @@
 \NeedsTeXFormat{LaTeX2e}[1996/06/01]
-\ProvidesPackage{drangreport}[2012/05/12 v1.1 alexwlchan]
+\ProvidesPackage{drangreport}[2012/10/24 v1.2 alexwlchan]
 \typeout{Package: `drangreport'}
-%
+
 % Items that must be customized for your company and computer are denoted
 % with a *****CUSTOMIZE***** comment.
-%
+
+% We start by loading a large number of packages
+
 % Include some useful standard packages
 \RequirePackage{ifthen,graphicx,float,color,hyperref}
 \hypersetup{colorlinks=true}
 \usepackage[small]{caption}
-%
+
 % Get the nice d-bend symbol for warnings
 \RequirePackage{manfnt}
-%
+
 % Defines a counter to keep track of lecture numbers
-% I think it's this early because it conflicts with amsmath
-% But I can't remember why
+% Introduced early because it conflicts with amsmath, iirc
 \newcounter{lecture}
-%
+
 % Define a set of useful symbols
 \RequirePackage{amsmath,drangsymbols,units,commath}
-%
+
 % Include a package I stole from Jakob Schiotz
 \RequirePackage{tweaklist}
-%
+
 % Defines the dcases environment
 \RequirePackage{mathtools}
-%
+
+% Used for the boxes around theorems and similar
+\RequirePackage{framed}
+
+% For annotations in draft files
+\RequirePackage{todonotes}
+
 % Includes the table decorations that I like
 \RequirePackage{booktabs,multirow,eukdate}
-%
+
 % Items for handling options
 \newcounter{fontset}
 \newcommand{\titlefamily}{}
 \newcommand{\authorlength}{2in}
 \newcommand{\logolength}{1in}
+
 % This should have the full pathname to your company logo. See also the
 % showlogo command below. You may need to fiddle with the scale factor to
 % get the logo to fit in the available space.
 % *****CUSTOMIZE*****
 \newcommand{\showlogo}{%
-  \centering\hspace{.25in}\includegraphics[scale=.65]{/Users/alexwlchan/Dropbox/BATS/bat-large.pdf}
+  \centering\hspace{.25in}
+  \includegraphics[scale=.65]
+  {/Users/alexwlchan/Dropbox/BATS/bat-large.pdf}
 }
-%
+
 % An option to the package determines the font set we're going to use.
 % The default is the Computer Modern set (fontset 0), which is like
 % standard LaTeX. The other three options are:
@@ -86,14 +96,14 @@
   \setcounter{fontset}{4}%        Times fontset with Optima headings
 }
 
-%
-% Another option to the package determines whether the company logo
-% appears on the title page. Normally the logo should appear, but 
-% not when one or more of the authors is not from the company.
+% Another option to the package determines whether the (company) logo
+% appears on the title page. By default, the logo does not appear.
 % *****CUSTOMIZE*****
 \DeclareOption{logo}{%
   \renewcommand{\showlogo}{%
-    \centering\hspace{.25in}\includegraphics[scale=.65]{/Users/alexwlchan/Dropbox/BATS/bat-large.pdf}
+    \centering\hspace{.25in}
+	\includegraphics[scale=.65]
+	{/Users/alexwlchan/Dropbox/BATS/bat-large.pdf}
   }%
   \renewcommand{\authorlength}{2in}%
   \renewcommand{\logolength}{1in}%
@@ -103,27 +113,32 @@
   \renewcommand{\authorlength}{2.75in}%
   \renewcommand{\logolength}{.25in}%
 }
-%
+
+% Uses roman numerals (i), (ii), (iii) for numbered lists by default,
+% which I prefer
 \renewcommand{\labelenumi}{(\roman{enumi})}
 
+% An option for my examples sheets, which sets up slightly
+% different numbering styles
 \DeclareOption{examples}{%
   \renewcommand{\labelenumi}{\bfseries\sffamily{\arabic{enumi}.}}
   \renewcommand{\labelenumii}{(\roman{enumii})}
   \renewcommand{\labelenumiii}{(\alph{enumiii})}
 }
 
+% An option to make links black for printing
 \DeclareOption{blacklinks}{
   \hypersetup{colorlinks=false}
 }
 
 \ExecuteOptions{nologo, cm}
 \ProcessOptions
-%
+
 % Handle the fontset option.
-%
-%
+
 % Set the side margins to 1.25 in. See Kopka & Daly C.3.1.
-% Placed before font options are executed to allow for wider margins in the mathsiecat option.
+% Placed before font options are executed to allow for wider
+% customisation in the font options.
 \newlength{\uni@sidemargin}
 \setlength{\uni@sidemargin}{1.25in}
 \setlength{\textwidth}{\paperwidth}
@@ -131,11 +146,6 @@
 \setlength{\oddsidemargin}{\uni@sidemargin}
 \addtolength{\oddsidemargin}{-1in}%         to account for TeX's automatic 1in
 \setlength{\evensidemargin}{\oddsidemargin}
-%
-
-
-\RequirePackage{framed}
-\RequirePackage{todonotes}
 
 \ifthenelse{\value{fontset}=0}
 	{
@@ -614,4 +624,4 @@
 %            },
 % }
 
-\newcommand{\shortskip}{\setlength{parskip}{2pt}}
+\newcommand{\shortskip}{\setlength{\parskip}{2pt}}
