@@ -83,7 +83,7 @@
 }
 
 \newenvironment{lemma}[1][]{%
- \stepcounter{equation}%
+ \refstepcounter{equation}%
   \ifstrempty{#1}%
   {\begin{mdframed}[style=lemma]
   {\bfseries{Lemma~\theequation.}}
@@ -92,8 +92,18 @@
   {\bfseries{Lemma~\theequation}} (#1){\bfseries{.}}\relax%
 }}{\end{mdframed}}
 
+\newenvironment{axiom}[1][]{%
+ \refstepcounter{equation}%
+  \ifstrempty{#1}%
+  {\begin{mdframed}[style=lemma]
+  {\bfseries{Axiom~\theequation.}}
+  \relax}
+  {\begin{mdframed}[style=lemma]
+  {\bfseries{Axiom~\theequation}} (#1){\bfseries{.}}\relax%
+}}{\end{mdframed}}
+
 \newenvironment{example}[1][]{%
- \stepcounter{equation}%
+ \refstepcounter{equation}%
   \ifstrempty{#1}%
   {\begin{mdframed}[style=lemma]
   {\bfseries{Example~\theequation.}}
@@ -103,7 +113,7 @@
 }}{\end{mdframed}}
 
 \newenvironment{examples}[1][]{%
- \stepcounter{equation}%
+ \refstepcounter{equation}%
   \ifstrempty{#1}%
   {\begin{mdframed}[style=lemma]
   {\bfseries{Examples~\theequation.}}
@@ -113,7 +123,7 @@
 }}{\end{mdframed}}
 
 \newenvironment{exercise}[1][]{%
- \stepcounter{equation}%
+ \refstepcounter{equation}%
   \ifstrempty{#1}%
   {\begin{mdframed}[style=lemma]
   {\bfseries{Exercise~\theequation.}}
@@ -123,7 +133,7 @@
 }}{\end{mdframed}}
 
 \newenvironment{exercises}[1][]{%
- \stepcounter{equation}%
+ \refstepcounter{equation}%
   \ifstrempty{#1}%
   {\begin{mdframed}[style=lemma]
   {\bfseries{Exercises~\theequation.}}
@@ -136,7 +146,7 @@
  \item #1}
 
 \newenvironment{proposition}[1][]{%
- \stepcounter{equation}%
+ \refstepcounter{equation}%
   \ifstrempty{#1}%
   {\begin{mdframed}[style=lemma]
   {\bfseries{Proposition~\theequation.}}
@@ -149,7 +159,7 @@
 \RequirePackage{amsthm}
 
 \theoremstyle{plain}
-\newtheorem{axiom}[equation]{Axiom}
+% \newtheorem{axiom}[equation]{Axiom}
 \newtheorem*{aim}{Aim}
 \newtheorem{corollary}[equation]{Corollary}
 \newtheorem{assertion}[equation]{Assertion}
@@ -349,6 +359,7 @@
 \newcommand{\SL}{\text{SL}}
 \newcommand{\SO}{\text{SO}}
 
+\DeclareMathOperator*{\adj}{adj}
 \newcommand{\Trans}{{\sf{T}}}
 
 \newcommand{\qend}{\hfill $\blacksquare$}
@@ -477,3 +488,7 @@ Printed: \today}}
 
 \usepackage{marginnote}
 \newcommand{\datemarker}[1]{\marginnote{\textsf{#1}}}
+
+\newcommand{\p}{^{\,\prime}}
+\newcommand{\pp}{^{\,\prime\prime}}
+\newcommand{\ppp}{^{\,\prime\prime\prime}}
