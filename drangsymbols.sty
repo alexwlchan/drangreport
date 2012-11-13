@@ -309,8 +309,11 @@
 \newcommand{\wiki}[2]{\href{http://en.wikipedia.org/wiki/#1}{\emph{#2}}}
 \newcommand{\wikirm}[2]{\href{http://en.wikipedia.org/wiki/#1}{#2}}
 
-\newcommand{\vvert}[1]{\left\vert #1 \right\vert}
-\newcommand{\VVert}[1]{\left\Vert #1 \right\Vert}
+\newcommand{\lV}{\left\Vert}
+\newcommand{\rV}{\right\Vert}
+
+\newcommand{\lv}{\left\vert}
+\newcommand{\rv}{\right\vert}
 
 \newcommand{\isom}{\cong}
 \newcommand{\isomto}{\xrightarrow{\sim}}
@@ -321,6 +324,8 @@
 
 \newcommand{\injto}{\hookrightarrow}
 \newcommand{\injfrom}{\hookrightarrow}
+
+\DeclareMathOperator*{\erf}{erf}
 
 % Group operators
 
@@ -383,99 +388,100 @@
 
 % At some point I should roll these together
 
-\newcommand{\NotesTitle}[6]
-{\begin{center}
+% Major heading line 1
+% Major heading line 2
+% Minor heading
+% Title
+% Lectured by
+% Professor
+% Notes by
+% Me
+% Footer text
+\newcommand{\TitlePage}[9]
+{
+\begin{center}
 
 \thispagestyle{empty}
 
 \textsc{\textcolor{white}{AAA}}\\[1.5cm]
-	{\large Part #1 of the Mathematical Tripos of}\\[0.1cm]
-	{\large the University of Cambridge}\\[0.5cm] % Major heading such as course name
-	{\large #2}\\[0.5cm] % Minor heading such as course title
+{\large #1}\\[0.1cm]
+{\large #2}\\[0.5cm] % Major heading such as course name
+{\large #3}\\[0.5cm] % Minor heading such as course title
 	
-	\HRule \\[0.4cm]
-	{\huge \sffamily\bfseries #3}\\[0.4cm] % Title of your document
-	\HRule \\[1.5cm]
+\HRule \\[0.4cm]
+{\huge \sffamily\bfseries #4}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
 	
 	\begin{minipage}{0.4\textwidth}
 	\begin{flushleft} \large
-	\emph{Lectured by:}\\
-	#4~\textsc{#5} % Your name
+	\emph{#5}\\
+	#6 % Your name
 	\end{flushleft}
 	\end{minipage}
 	~
 	\begin{minipage}{0.4\textwidth}
 	\begin{flushright} \large
-	\emph{Notes by:} \\
-	Alex \textsc{Chan} % Supervisor's Name
+	\emph{#7} \\
+	#8 % Supervisor's Name
 	\end{flushright}
 	\end{minipage}\vfill
 	
-	{\large Comments and corrections should be sent to \href{mailto:awlc2@cam.ac.uk}{awlc2@cam.ac.uk}.} \\[0.5cm] %
-	{\large This work is licensed under a \href{http://creativecommons.org/licenses/by-nc-sa/3.0/}{Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License}.} \\[0.5cm] %
-	{\large The following resources are \emph{not} endorsed by the University of Cambridge.} \\[0.5cm] %
+	#9 \\[0.5cm] %
 	{\large Printed \today.}\\[3cm] %
 	
-	\vfill
 	\end{center}
 	
-		\pagebreak
-	
-	\thispagestyle{empty}
-	
-	#6
-	
-	\setcounter{page}{0}
-	
-	\newpage}
+	\pagebreak}
 
-\newcommand{\NotesSubTitle}[7]
-{\begin{center}
+% My custom title pages for Cambridge notes
 
-\thispagestyle{empty}
+\newcommand{\NotesTitle}[6]{\TitlePage
+	{Part #1 of the Mathematical Tripos}
+		{of the University of Cambridge}
+		{#2}
+		{#3}
+		{Lectured by:}
+		{#4~\textsc{#5}}
+		{Notes by:}
+		{Alex \textsc{Chan}}
+		{
+			{\large Comments and corrections should be sent to \href{mailto:awlc2@cam.ac.uk}{awlc2@cam.ac.uk}.} \\[0.5cm] %
+			{\large This work is licensed under a \href{http://creativecommons.org/licenses/by-nc-sa/3.0/}{Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License}.} \\[0.5cm] %
+			{\large The following resources are \emph{not} endorsed by the University of Cambridge.}
+		}
+		
+		\thispagestyle{empty}
+		
+		#6
+		
+		\setcounter{page}{0}
+		
+\newpage}
 
-\textsc{\textcolor{white}{AAA}}\\[1.5cm]
-	{\large Part #1 of the Mathematical Tripos of}\\[0.1cm]
-	{\large the University of Cambridge}\\[0.5cm] % Major heading such as course name
-	{\large #2}\\[0.5cm] % Minor heading such as course title
+\newcommand{\NotesSubTitle}[7]{\SubTitlePage
+	{Part #1 of the Mathematical Tripos}
+		{of the University of Cambridge}
+		{#2}
+		{{\huge \sffamily\bfseries #3}\\[0.4cm]
 	
-	\HRule \\[0.4cm]
-	{\huge \sffamily\bfseries #3}\\[0.4cm]
-	
-	{\large \sffamily\bfseries #7}\\[0.4cm] % Title of your document
-	\HRule \\[1.5cm]
-	
-	\begin{minipage}{0.4\textwidth}
-	\begin{flushleft} \large
-	\emph{Lectured by:}\\
-	#4~\textsc{#5} % Your name
-	\end{flushleft}
-	\end{minipage}
-	~
-	\begin{minipage}{0.4\textwidth}
-	\begin{flushright} \large
-	\emph{Notes by:} \\
-	Alex \textsc{Chan} % Supervisor's Name
-	\end{flushright}
-	\end{minipage}\vfill
-	
-	{\large Comments and corrections should be sent to \href{mailto:awlc2@cam.ac.uk}{awlc2@cam.ac.uk}.} \\[0.5cm] %
-	{\large This work is licensed under a \href{http://creativecommons.org/licenses/by-nc-sa/3.0/}{Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License}.} \\[0.5cm] %
-	{\large The following resources are \emph{not} endorsed by the University of Cambridge.} \\[0.5cm] %
-	{\large Printed \today.}\\[3cm] %
-	
-	\vfill
-	\end{center}
-	
-		\pagebreak
-	
-	\thispagestyle{empty}
-	
-	#6
-	
-	\setcounter{page}{0}
-	
-	\newpage}
+		{\large \sffamily\bfseries #7}}
+		{Lectured by:}
+		{#4~\textsc{#5}}
+		{Notes by:}
+		{Alex \textsc{Chan}}
+		{
+			{\large Comments and corrections should be sent to \href{mailto:awlc2@cam.ac.uk}{awlc2@cam.ac.uk}.} \\[0.5cm] %
+			{\large This work is licensed under a \href{http://creativecommons.org/licenses/by-nc-sa/3.0/}{Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License}.} \\[0.5cm] %
+			{\large The following resources are \emph{not} endorsed by the University of Cambridge.}
+		}
+		
+		\thispagestyle{empty}
+		
+		#6
+		
+		\setcounter{page}{0}
+		
+\newpage}
 
 \newcommand{\ExamplesTitle}[3]
 {{\LARGE\bfseries\sffamily{#1, Examples Sheet #2}}
@@ -492,3 +498,9 @@ Printed: \today}}
 \newcommand{\p}{^{\,\prime}}
 \newcommand{\pp}{^{\,\prime\prime}}
 \newcommand{\ppp}{^{\,\prime\prime\prime}}
+
+\newcommand{\drangarray}{\renewcommand{\arraystretch}{0.95}}
+\drangarray
+
+\DeclareMathOperator*{\RHS}{RHS}
+\DeclareMathOperator*{\LHS}{LHS}

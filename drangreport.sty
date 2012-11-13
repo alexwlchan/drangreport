@@ -100,11 +100,11 @@
 % appears on the title page. By default, the logo does not appear.
 % *****CUSTOMIZE*****
 \DeclareOption{logo}{%
-  \renewcommand{\showlogo}{%
-    \centering\hspace{.25in}
-	\includegraphics[scale=.65]
-	{/Users/alexwlchan/Dropbox/BATS/bat-large.pdf}
-  }%
+  % \renewcommand{\showlogo}{%
+  %     \centering\hspace{.25in}
+  % 	\includegraphics[scale=.65]
+  % 	{/Users/alexwlchan/Dropbox/BATS/bat-large.pdf}
+  %   }%
   \renewcommand{\authorlength}{2in}%
   \renewcommand{\logolength}{1in}%
 }
@@ -118,17 +118,58 @@
 % which I prefer
 \renewcommand{\labelenumi}{(\roman{enumi})}
 
+% An option to make links black for printing
+\DeclareOption{blacklinks}{
+  \hypersetup{colorlinks=false}
+}
+
+% Change the headings pagestyle to show the title if it's an article.
+% See Kopka & Daly C.3.2 and article.cls.
+\ifthenelse{\boolean{@twoside}}{%
+  \renewcommand{\ps@headings}{%
+    \renewcommand*{\@oddfoot}{}%
+    \renewcommand*{\@evenfoot}{}%
+	\renewcommand*{\@oddhead}{\hfill\small\sffamily{%\itshape{\@section} $\vert$ 
+		\bfseries{\thepage}}} %
+	\renewcommand*{\@evenhead}{\small\sffamily{{\bfseries{\thepage}} $\vert$ {\itshape{\@shorttitle}} \hfill}} %
+    % \renewcommand*{\@oddhead}{\normalfont\normalsize\hfill\thepage}%
+    % \renewcommand*{\@evenhead}{\normalfont\normalsize\thepage\hfill{\itshape\MakeUppercase{\@shorttitle}}}%
+  }%
+}{%
+  \renewcommand{\ps@headings}{%
+    \renewcommand*{\@oddfoot}{}%
+    \renewcommand*{\@evenfoot}{}%
+    % \renewcommand*{\@oddhead}{\normalfont\normalsize{\itshape\MakeUppercase{\@shorttitle}}\hfill\thepage}%
+	\renewcommand*{\@oddhead}{\hfill\small\sffamily{{\itshape{\@shorttitle}} $\vert$ \bfseries{\thepage}}}
+    \renewcommand*{\@evenhead}{\@oddhead}%
+  }%
+}
+
 % An option for my examples sheets, which sets up slightly
-% different numbering styles
+% different numbering styles and different page headings
 \DeclareOption{examples}{%
   \renewcommand{\labelenumi}{\bfseries\sffamily{\arabic{enumi}.}}
   \renewcommand{\labelenumii}{(\roman{enumii})}
   \renewcommand{\labelenumiii}{(\alph{enumiii})}
-}
-
-% An option to make links black for printing
-\DeclareOption{blacklinks}{
-  \hypersetup{colorlinks=false}
+  \ifthenelse{\boolean{@twoside}}{%
+    \renewcommand{\ps@headings}{%
+      \renewcommand*{\@oddfoot}{}%
+      \renewcommand*{\@evenfoot}{}%
+  	\renewcommand*{\@oddhead}{\hfill \small\sffamily{{\bfseries{\thepage}}
+	$\vert$ {\itshape{\@shorttitle}}}} %
+  	\renewcommand*{\@evenhead}{\small\sffamily{{\bfseries{\thepage}}}} %
+      % \renewcommand*{\@oddhead}{\normalfont\normalsize\hfill\thepage}%
+      % \renewcommand*{\@evenhead}{\normalfont\normalsize\thepage\hfill{\itshape\MakeUppercase{\@shorttitle}}}%
+    }%
+  }{%
+    \renewcommand{\ps@headings}{%
+      \renewcommand*{\@oddfoot}{}%
+      \renewcommand*{\@evenfoot}{}%
+      % \renewcommand*{\@oddhead}{\normalfont\normalsize{\itshape\MakeUppercase{\@shorttitle}}\hfill\thepage}%
+  	  \renewcommand*{\@oddhead}{\hfill\small\sffamily{{\itshape{\@shorttitle}} $\vert$ \bfseries{\thepage}}} %
+      \renewcommand*{\@evenhead}{\small\sffamily{{\bfseries{\thepage}}}} %
+    }%
+  }
 }
 
 \ExecuteOptions{nologo, cm}
@@ -377,27 +418,6 @@
 % Add a \client command that is similar to \author.
 \newcommand{\client}[1]{\newcommand{\@client}{#1}}
 %
-% Change the headings pagestyle to show the title if it's an article.
-% See Kopka & Daly C.3.2 and article.cls.
-\ifthenelse{\boolean{@twoside}}{%
-  \renewcommand{\ps@headings}{%
-    \renewcommand*{\@oddfoot}{}%
-    \renewcommand*{\@evenfoot}{}%
-	\renewcommand*{\@oddhead}{\hfill\small\sffamily{%\itshape{\@section} $\vert$ 
-		\bfseries{\thepage}}} %
-	\renewcommand*{\@evenhead}{\small\sffamily{{\bfseries{\thepage}} $\vert$ {\itshape{\@shorttitle}} \hfill}} %
-    % \renewcommand*{\@oddhead}{\normalfont\normalsize\hfill\thepage}%
-    % \renewcommand*{\@evenhead}{\normalfont\normalsize\thepage\hfill{\itshape\MakeUppercase{\@shorttitle}}}%
-  }%
-}{%
-  \renewcommand{\ps@headings}{%
-    \renewcommand*{\@oddfoot}{}%
-    \renewcommand*{\@evenfoot}{}%
-    % \renewcommand*{\@oddhead}{\normalfont\normalsize{\itshape\MakeUppercase{\@shorttitle}}\hfill\thepage}%
-	\renewcommand*{\@oddhead}{\hfill\small\sffamily{{\itshape{\@shorttitle}} $\vert$ \bfseries{\thepage}}}
-    \renewcommand*{\@evenhead}{\@oddhead}%
-  }%
-}
 %
 % Use headings for most pages
 \pagestyle{headings}
