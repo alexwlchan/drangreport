@@ -597,10 +597,12 @@
 % All of my stuff for keeping track of lectures
 \newcommand{\sektion}[1]{\cleardoublepage \section{#1} \gdef\sectitle{#1}
 						 \setcounter{footnote}{0}}
+\newcommand{\sektionu}[1]{\cleardoublepage \section*{#1} \gdef\sectitle{#1}
+						  \addcontentsline{toc}{section}{#1}
+						  \setcounter{footnote}{0}}
 \newcommand{\subsektion}[1]{\subsection*{#1}
 							\addcontentsline{toc}{subsection}{#1}}
-\newcommand{\sekktion}[2]{\newpage \section*{#2} \gdef\sectitle{#2}
-						  \addcontentsline{toc}{section}{#1}
+\newcommand{\sekktion}[2]{\newpage \section[#1]{#2} \gdef\sectitle{#1}
 						  \setcounter{footnote}{0}}
 \newcommand{\subsekktion}[2]{\subsection*{#2}
 							 \addcontentsline{toc}{subsection}{#1}}

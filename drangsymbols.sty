@@ -40,7 +40,7 @@
 \definecolor{grey60}{rgb}{0.7,0.7,0.7}
 
 \newenvironment{theorem}[1][]{%
- \stepcounter{equation}%
+ \refstepcounter{equation}%
   \ifstrempty{#1}%
   {\mdfsetup{%
     frametitle={%
@@ -62,7 +62,7 @@
    }{\end{mdframed}}
 
 \newenvironment{definition}[1][]{%
- \stepcounter{equation}%
+ \refstepcounter{equation}%
   \global\mdfdefinestyle{definition}{%
   	linecolor=grey60,linewidth=5pt,%
 	skipabove=0.4\parskip,skipbelow=0.4\parskip,
