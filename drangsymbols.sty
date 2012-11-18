@@ -62,7 +62,7 @@
    }{\end{mdframed}}
 
 \newenvironment{definition}[1][]{%
- \refstepcounter{equation}%
+ % \refstepcounter{equation}
   \global\mdfdefinestyle{definition}{%
   	linecolor=grey60,linewidth=5pt,%
 	skipabove=0.4\parskip,skipbelow=0.4\parskip,
@@ -70,10 +70,10 @@
   }
   \ifstrempty{#1}%
   {\begin{mdframed}[style=definition]
-  {\bfseries{Definition~\theequation.}}
+  {\bfseries{Definition.}} % Removed ~\theequation before the full stop
   \relax}
   {\begin{mdframed}[style=definition]
-  {\bfseries{Definition~\theequation}} (#1){\bfseries{.}}\relax%
+  {\bfseries{Definition}} (#1){\bfseries{.}}\relax % Removed ~\theequation before the full stop
 }}{\end{mdframed}}
 
 \global\mdfdefinestyle{lemma}{%
@@ -255,27 +255,27 @@
 
 \renewcommand{\d}{\dif}
 
-\newcommand{\N}{\bb{N}}
+\newcommand{\N}{\bb{"N}}
 \newcommand{\Z}{\bb{Z}}
 \newcommand{\Q}{\bb{Q}}
 \newcommand{\R}{\bb{R}}
 \renewcommand{\C}{\bb{C}}
-\newcommand{\F}{\bb{F}}
+\newcommand{\F}{\bb{"F}}
 
-\newcommand{\Rm}{\bb{R}^m}
-\newcommand{\Rn}{\bb{R}^n}
-\newcommand{\Cn}{\bb{C}^n}
-\newcommand{\Fm}{\bb{F}^m}
-\newcommand{\Fn}{\bb{F}^n}
+\newcommand{\Rm}{\R^m}
+\newcommand{\Rn}{\R^n}
+\newcommand{\Cn}{\C^n}
+\newcommand{\Fm}{\F^m}
+\newcommand{\Fn}{\F^n}
 
-\newcommand{\iN}{\in\bb{N}}
-\newcommand{\iZ}{\in\bb{Z}}
-\newcommand{\iQ}{\in\bb{Q}}
-\newcommand{\iR}{\in\bb{R}}
-\newcommand{\iRn}{\in\bb{R}^n}
-\newcommand{\iRm}{\in\bb{R}^m}
-\newcommand{\iC}{\in\bb{C}}
-\newcommand{\iF}{\in\bb{F}}
+\newcommand{\iN}{\in\N}
+\newcommand{\iZ}{\in\Z}
+\newcommand{\iQ}{\in\Q}
+\newcommand{\iR}{\in\R}
+\newcommand{\iRn}{\in\Rn}
+\newcommand{\iRm}{\in\Rm}
+\newcommand{\iC}{\in\C}
+\newcommand{\iF}{\in\F}
 
 \DeclareMathOperator*{\Tr}{Tr}
 \DeclareMathOperator*{\rank}{rank}
@@ -360,7 +360,7 @@
 
 \newcommand{\centra}{\cal{Z}}
 \newcommand{\centre}{\cal{Z}}
-\newcommand{\GL}{\text{GL}}
+\DeclareMathOperator*{\GL}{GL}
 \newcommand{\SL}{\text{SL}}
 \newcommand{\SO}{\text{SO}}
 
@@ -504,3 +504,7 @@ Printed: \today}}
 
 \DeclareMathOperator*{\RHS}{RHS}
 \DeclareMathOperator*{\LHS}{LHS}
+
+% These two commands came from a course in Probability
+\newcommand{\glstack}{\begin{array}{c} \geq \\ \leq\end{array}}
+\newcommand{\lgstack}{\begin{array}{c} \leq \\ \geq\end{array}}
