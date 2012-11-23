@@ -76,31 +76,42 @@
   {\bfseries{Definition}} (#1){\bfseries{.}}\relax % Removed ~\theequation before the full stop
 }}{\end{mdframed}}
 
+\newenvironment{axiom}[1][]{%
+ \refstepcounter{equation}%
+  \ifstrempty{#1}%
+  {\begin{mdframed}[style=definition]
+  {\bfseries{Axiom~\theequation.}}
+  \relax}
+  {\begin{mdframed}[style=definition]
+  {\bfseries{Axiom~\theequation}} (#1){\bfseries{.}}\relax%
+}}{\end{mdframed}}
+
+
 \global\mdfdefinestyle{lemma}{%
 	linecolor=grey60,linewidth=1.5pt,
 	skipabove=0.5\parskip,skipbelow=0.5\parskip,
 	topline=false,rightline=false,bottomline=false
 }
 
-\newenvironment{lemma}[1][]{%
- \refstepcounter{equation}%
-  \ifstrempty{#1}%
-  {\begin{mdframed}[style=lemma]
-  {\bfseries{Lemma~\theequation.}}
-  \relax}
-  {\begin{mdframed}[style=lemma]
-  {\bfseries{Lemma~\theequation}} (#1){\bfseries{.}}\relax%
-}}{\end{mdframed}}
+% \newenvironment{lemma}[1][]{%
+%  \refstepcounter{equation}%
+%   \ifstrempty{#1}%
+%   {\begin{mdframed}[style=lemma]
+%   {\bfseries{Lemma~\theequation.}}
+%   \relax}
+%   {\begin{mdframed}[style=lemma]
+%   {\bfseries{Lemma~\theequation}} (#1){\bfseries{.}}\relax%
+% }}{\end{mdframed}}
 
-\newenvironment{axiom}[1][]{%
- \refstepcounter{equation}%
-  \ifstrempty{#1}%
-  {\begin{mdframed}[style=lemma]
-  {\bfseries{Axiom~\theequation.}}
-  \relax}
-  {\begin{mdframed}[style=lemma]
-  {\bfseries{Axiom~\theequation}} (#1){\bfseries{.}}\relax%
-}}{\end{mdframed}}
+% \newenvironment{axiom}[1][]{%
+%  \refstepcounter{equation}%
+%   \ifstrempty{#1}%
+%   {\begin{mdframed}[style=lemma]
+%   {\bfseries{Axiom~\theequation.}}
+%   \relax}
+%   {\begin{mdframed}[style=lemma]
+%   {\bfseries{Axiom~\theequation}} (#1){\bfseries{.}}\relax%
+% }}{\end{mdframed}}
 
 \newenvironment{example}[1][]{%
  \refstepcounter{equation}%
@@ -145,15 +156,15 @@
 \newenvironment{question}[1][]{%
  \item #1}
 
-\newenvironment{proposition}[1][]{%
- \refstepcounter{equation}%
-  \ifstrempty{#1}%
-  {\begin{mdframed}[style=lemma]
-  {\bfseries{Proposition~\theequation.}}
-  \relax}
-  {\begin{mdframed}[style=lemma]
-  {\bfseries{Proposition~\theequation}} (#1){\bfseries{.}}\relax%
-}}{\end{mdframed}}
+% \newenvironment{proposition}[1][]{%
+%  \refstepcounter{equation}%
+%   \ifstrempty{#1}%
+%   {\begin{mdframed}[style=lemma]
+%   {\bfseries{Proposition~\theequation.}}
+%   \relax}
+%   {\begin{mdframed}[style=lemma]
+%   {\bfseries{Proposition~\theequation}} (#1){\bfseries{.}}\relax%
+% }}{\end{mdframed}}
 
 
 \RequirePackage{amsthm}
@@ -163,6 +174,8 @@
 \newtheorem*{aim}{Aim}
 \newtheorem{corollary}[equation]{Corollary}
 \newtheorem{assertion}[equation]{Assertion}
+\newtheorem{lemma}[equation]{Lemma}
+\newtheorem{proposition}[equation]{Proposition}
 \newtheorem*{claim}{Claim}
 
 \theoremstyle{definition}
@@ -174,15 +187,6 @@
 \newtheorem*{remarks}{Remarks}
 \newtheorem*{note}{Note}
 
-
-
-
-
-
-% 
-
-% 
-% 
 % \newtheorem{task}{Task}
 % 
 % \theoremstyle{definition}
@@ -508,3 +512,16 @@ Printed: \today}}
 % These two commands came from a course in Probability
 \newcommand{\glstack}{\begin{array}{c} \geq \\ \leq\end{array}}
 \newcommand{\lgstack}{\begin{array}{c} \leq \\ \geq\end{array}}
+
+% Some Linear Algebra operators
+
+\DeclareMathOperator*{\Mat}{Mat}
+\DeclareMathOperator*{\End}{End}
+\DeclareMathOperator*{\Gr}{Gr}
+\DeclareMathOperator*{\Res}{Res}
+\DeclareMathOperator*{\rk}{rk}
+\DeclareMathOperator*{\Bil}{Bil}
+\DeclareMathOperator*{\Char}{char}
+\DeclareMathOperator*{\sign}{sign}
+\DeclareMathOperator*{\Isom}{Isom}
+\DeclareMathOperator*{\Lin}{\cal{"L}}
