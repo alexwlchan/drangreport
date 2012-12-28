@@ -37,6 +37,9 @@
 % Includes the table decorations that I like
 \RequirePackage{booktabs,multirow,eukdate}
 
+% Package for font handling
+\RequirePackage{mathspec}
+
 % Items for handling options
 \newcounter{fontset}
 \newcommand{\titlefamily}{}
@@ -172,6 +175,11 @@
   }
 }
 
+\DeclareOption{lyonmath}{
+  \setmathsfont(Latin,Digits)[Scale=MatchLowercase]{Lyon}
+  \setmathrm[Ligatures=TeX,Scale=MatchLowercase]{Lyon}
+}
+
 \ExecuteOptions{nologo, cm}
 \ProcessOptions
 
@@ -303,6 +311,7 @@
   }
  }
 %
+
 % No extra space after sentence ends.
 % \frenchspacing
 \raggedbottom
