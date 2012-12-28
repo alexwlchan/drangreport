@@ -525,3 +525,99 @@ Printed: \today}}
 \DeclareMathOperator*{\sign}{sign}
 \DeclareMathOperator*{\Isom}{Isom}
 \DeclareMathOperator*{\Lin}{\cal{"L}}
+
+\usepackage{listings}
+\lstset{
+	basicstyle=\footnotesize\ttfamily, % Standardschrift
+	numbers=left,               % Ort der Zeilennummern
+	numberstyle=\tiny,          % Stil der Zeilennummern
+	stepnumber=2,               % Abstand zwischen den Zeilennummern
+	numbersep=5pt,              % Abstand der Nummern zum Text
+	tabsize=2,                  % Groesse von Tabs
+	extendedchars=true,         %
+	breaklines=true,            % Zeilen werden Umgebrochen
+	keywordstyle=\color{red},
+		frame=b,         
+% 	% keywordstyle=[1]\textbf,    % Stil der Keywords
+% 	% keywordstyle=[2]\textbf,    %
+% 	% keywordstyle=[3]\textbf,    %
+% 	% keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+	stringstyle=\color{white}\ttfamily, % Farbe der String
+	showspaces=false,           % Leerzeichen anzeigen ?
+	showtabs=false,             % Tabs anzeigen ?
+	xleftmargin=17pt,
+	framexleftmargin=17pt,
+	framexrightmargin=5pt,
+	framexbottommargin=4pt,
+	% backgroundcolor=\color{lightgray},
+	showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+}
+
+\RequirePackage{caption}
+\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.29, 0.23, 0.23,0.01}{\parbox{\textwidth}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{
+	format=listing,
+	labelfont=bf,
+	% textfont=black,
+	singlelinecheck=false,
+	margin=0pt,
+	font={bf,footnotesize}
+}
+
+\newcommand{\mtmc}{\fontspec{Helvetica}\tiny\color{gray}}
+
+\newcommand{\mmatica}[1]{
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{
+	>{\mtmc} r
+	>{\!\!\!\ttfamily} l}
+	#1
+\end{tabular}
+\drangarray}
+
+\newcommand{\mnewline}{\\[-5pt] &}
+
+% \newcommand{\mmaticablock}[2]{
+% \renewcommand{\arraystretch}{1.3}
+% \begin{tabular}{r p{12cm}}
+% 	\mtmc In[1]:= &
+% \begin{minipage}[t]{\linewidth}
+% \begin{verbatim}
+% return [offset](\%ebp)
+% return2
+% \end{verbatim}
+% \end{minipage}
+% \end{tabular}
+% \drangarray
+% }
+
+% \newcommand{\mmaticablock}[1]{
+% \renewcommand{\arraystretch}{1.3}
+% \begin{tabular}{
+% 	>{\mtmc}{r} p{0.55cm} p{12cm}}
+% 	#1
+% \end{tabular}
+% \drangarray}
+
+% \newcommand{\mmaticablock}[1]{
+% \renewcommand{\arraystretch}{1.3}
+% \begin{tabular}{>{\begin{figure}[!h]\begin{minipage}[t]{1.0\textwidth}\vspace{0pt}\mtmc}r <{\end{minipage}\end{figure}}  >{\begin{minipage}{1.0\textwidth}} p{0.9\textwidth} <{\end{minipage}}}
+% 	#1
+% \end{tabular}
+% \drangarray}
+
+\newcounter{catamlisting}
+\theoremstyle{definition}
+% \newtheorem{catam}[catamlisting]{Listing}
+
+\newenvironment{catam}[1][]
+{
+	\refstepcounter{catamlisting}%
+	 	{\bfseries\sffamily{Listing~\thecatamlisting.}}
+		\relax
+}
+{}
+
+% {%
+%  \refstepcounter{catamlisting}%
+%   {{\bfseries\sffamily{Listing~\thecatamlisting.}}\relax} #1 {}}
