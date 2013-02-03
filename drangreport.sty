@@ -78,8 +78,8 @@
 %     typewriter: Courier
 %     math:       Mathematica
 %
-%	"mathsiecat" (fontset 4)
-%	  sans serif: Edmonsans
+%	"hivizviz" (fontset 4)
+%	  sans serif: FS Me
 %
 % Obviously, these fonts must be available to your LaTeX system for these options to work.
 %
@@ -95,7 +95,7 @@
 \DeclareOption{timesopt}{%
   \setcounter{fontset}{3}%        Times fontset with Optima headings
 }
-\DeclareOption{mathsiecat}{%
+\DeclareOption{hivizviz}{%
   \setcounter{fontset}{4}%        Times fontset with Optima headings
 }
 
@@ -132,9 +132,9 @@
   \renewcommand{\ps@headings}{%
     \renewcommand*{\@oddfoot}{}%
     \renewcommand*{\@evenfoot}{}%
-	\renewcommand*{\@oddhead}{\hfill\small\sffamily{%\itshape{\@section} $\vert$ 
+	\renewcommand*{\@oddhead}{\hfill\footnotesize\sffamily{{\itshape{\sectitle}} $\vert$ 
 		\bfseries{\thepage}}} %
-	\renewcommand*{\@evenhead}{\small\sffamily{{\bfseries{\thepage}} $\vert$ {\itshape{\@shorttitle}} \hfill}} %
+	\renewcommand*{\@evenhead}{\footnotesize\sffamily{{\bfseries{\thepage}} $\vert$ {\itshape{\@shorttitle}} \hfill}} %
     % \renewcommand*{\@oddhead}{\normalfont\normalsize\hfill\thepage}%
     % \renewcommand*{\@evenhead}{\normalfont\normalsize\thepage\hfill{\itshape\MakeUppercase{\@shorttitle}}}%
   }%
@@ -143,7 +143,7 @@
     \renewcommand*{\@oddfoot}{}%
     \renewcommand*{\@evenfoot}{}%
     % \renewcommand*{\@oddhead}{\normalfont\normalsize{\itshape\MakeUppercase{\@shorttitle}}\hfill\thepage}%
-	\renewcommand*{\@oddhead}{\hfill\small\sffamily{{\itshape{\@shorttitle}} $\vert$ \bfseries{\thepage}}}
+	\renewcommand*{\@oddhead}{\hfill\footnotesize\sffamily{{\itshape{\@shorttitle}} $\vert$ \bfseries{\thepage}}}
     \renewcommand*{\@evenhead}{\@oddhead}%
   }%
 }
@@ -158,9 +158,8 @@
     \renewcommand{\ps@headings}{%
       \renewcommand*{\@oddfoot}{}%
       \renewcommand*{\@evenfoot}{}%
-  	\renewcommand*{\@oddhead}{\hfill \small\sffamily{{\bfseries{\thepage}}
-	$\vert$ {\itshape{\@shorttitle}}}} %
-  	\renewcommand*{\@evenhead}{\small\sffamily{{\bfseries{\thepage}}}} %
+  	\renewcommand*{\@oddhead}{\hfill \footnotesize\sffamily{{\itshape{\@shorttitle}} $\vert$ {\bfseries{\thepage}}}} %
+  	\renewcommand*{\@evenhead}{\footnotesize\sffamily{{\bfseries{\thepage}} $\vert$ {\itshape{\@shorttitle}}} \hfill} %
       % \renewcommand*{\@oddhead}{\normalfont\normalsize\hfill\thepage}%
       % \renewcommand*{\@evenhead}{\normalfont\normalsize\thepage\hfill{\itshape\MakeUppercase{\@shorttitle}}}%
     }%
@@ -169,8 +168,8 @@
       \renewcommand*{\@oddfoot}{}%
       \renewcommand*{\@evenfoot}{}%
       % \renewcommand*{\@oddhead}{\normalfont\normalsize{\itshape\MakeUppercase{\@shorttitle}}\hfill\thepage}%
-  	  \renewcommand*{\@oddhead}{\hfill\small\sffamily{{\itshape{\@shorttitle}} $\vert$ \bfseries{\thepage}}} %
-      \renewcommand*{\@evenhead}{\small\sffamily{{\bfseries{\thepage}}}} %
+  	  \renewcommand*{\@oddhead}{\hfill\footnotesize\sffamily{{\itshape{\@shorttitle}} $\vert$ \bfseries{\thepage}}} %
+      \renewcommand*{\@evenhead}{\footnotesize\sffamily{{\bfseries{\thepage}}}} %
     }%
   }
 }
@@ -277,18 +276,18 @@
 	 \RequireXeTeX
 	 \usepackage{mathspec}
 	 
-	 \setmainfont[Ligatures=TeX]{Helvetica}
+	 \setmainfont[Ligatures=TeX]{FS Me}
 	 
-	 \setmathsfont(Latin,Digits)[Scale=MatchLowercase]{Times} % Scale=MatchLowercase,
+	 % \setmathsfont(Latin,Digits)[Scale=MatchLowercase]{Times} % Scale=MatchLowercase,
 	 
-	 \setmathsfont(Greek)[Scale=MatchLowercase]{Times} %Scale=MatchLowercase,
+	 % \setmathsfont(Greek)[Scale=MatchLowercase]{Times} %Scale=MatchLowercase,
 	 
-	 \setromanfont[Ligatures=TeX]{Helvetica}
+	 \setromanfont[Ligatures=TeX]{FS Me}
 	 
-	 \setsansfont[Ligatures=TeX]{Helvetica}
+	 \setsansfont[Ligatures=TeX]{FS Me}
 	 \setallmonofonts{Consolas for BBEdit}
 	 
-	 \setmathrm[Ligatures=TeX,Scale=MatchLowercase]{Times}
+	 % \setmathrm[Ligatures=TeX,Scale=MatchLowercase]{Times}
 	 
 	 \setminwhitespace[1250]
 	 

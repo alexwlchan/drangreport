@@ -1,0 +1,42 @@
+\NeedsTeXFormat{LaTeX2e}[1996/06/01]
+\ProvidesPackage{awlc-statistics}[2013/01/29 alexwlchan]
+\typeout{Package: `awlc-statistics'}
+
+% First we call the glossaries package, which lets us define acronyms
+\RequirePackage[section, numberedsection=autolabel]{glossaries}
+
+% Statistical related acronyms
+\newacronym{rv}{rv}{random variable}
+\newacronym{iid}{iid}{independent identically distributed}
+\newacronym{pdf}{pdf}{probability density function}
+\newacronym{pmf}{pmf}{probability mass function}
+\newacronym{mle}{mle}{maximum likelihood estimator}
+\newacronym{wlln}{WLLN}{Weak Law of Large Numbers}
+\newacronym{slln}{SLLN}{Strong Law of Large Numbers}
+\newacronym{mgf}{mgf}{moment generating function}
+\newacronym{mse}{mse}{mean squared error}
+\newacronym{CI}{CI}{confidence interval}
+
+\DeclareMathOperator*{\mse}{mse}
+\DeclareMathOperator*{\bias}{bias}
+
+% List of common distributions
+\DeclareMathOperator*{\Poisson}{Poisson}
+\DeclareMathOperator*{\Norm}{N}
+\DeclareMathOperator*{\Bin}{Bin}
+\DeclareMathOperator*{\Unif}{U}
+\DeclareMathOperator*{\Gammadist}{Gamma}
+\DeclareMathOperator*{\Gammafn}{\Gamma}
+\DeclareMathOperator*{\Exponential}{Exponential}
+\DeclareMathOperator*{\Bernouilli}{Bernouilli}
+
+% Expectation, probability and variance
+\DeclareMathOperator*{\expectation}{\bb{E}}
+\newcommand{\E}{\textstyle\expectation}
+
+\let\P\relax
+\DeclareMathOperator*{\probability}{\bb{P}}
+\newcommand{\P}{\textstyle\probability}
+
+\DeclareMathOperator*{\variation}{\bb{V}ar}
+\newcommand{\Var}{\textstyle\variation}

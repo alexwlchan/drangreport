@@ -186,6 +186,7 @@
 \newtheorem*{proof*}{Proof}
 \newtheorem*{remarks}{Remarks}
 \newtheorem*{note}{Note}
+\newtheorem*{notes}{Notes}
 
 % \newtheorem{task}{Task}
 % 
@@ -263,7 +264,8 @@
 \newcommand{\Z}{\bb{Z}}
 \newcommand{\Q}{\bb{Q}}
 \newcommand{\R}{\bb{R}}
-\renewcommand{\C}{\bb{C}}
+\let\C\relax
+\newcommand{\C}{\bb{C}}
 \newcommand{\F}{\bb{"F}}
 
 \newcommand{\Rm}{\R^m}
@@ -281,12 +283,6 @@
 \newcommand{\iC}{\in\C}
 \newcommand{\iF}{\in\F}
 
-\DeclareMathOperator*{\Tr}{Tr}
-\DeclareMathOperator*{\rank}{rank}
-\DeclareMathOperator*{\sgn}{sgn}
-\DeclareMathOperator*{\Sym}{Sym}
-\DeclareMathOperator*{\hcf}{hcf}
-\DeclareMathOperator*{\lcm}{lcm}
 \DeclareMathOperator*{\id}{id}
 \DeclareMathOperator*{\Curl}{curl}
 \DeclareMathOperator*{\Grad}{grad}
@@ -319,6 +315,8 @@
 \newcommand{\lv}{\left\vert}
 \newcommand{\rv}{\right\vert}
 
+\newcommand{\vvert}[1]{\left\vert #1 \right\vert}
+
 \newcommand{\isom}{\cong}
 \newcommand{\isomto}{\xrightarrow{\sim}}
 \newcommand{\isomfrom}{\xleftarrow{\sim}}
@@ -330,46 +328,6 @@
 \newcommand{\injfrom}{\hookrightarrow}
 
 \DeclareMathOperator*{\erf}{erf}
-
-% Group operators
-
-\DeclareMathOperator*{\stab}{stab}
-\DeclareMathOperator*{\ccl}{ccl}
-\DeclareMathOperator*{\orb}{orb}
-
-% The slightly hacky optional arguments for Orb and Stab are taken from
-% http://www.hanskalabs.net/posts/latex-newcommand-optional-argument/
-
-\def\Orb#1{\def\tempa{#1}\futurelet\next\Orb@i}% Save first argument
-\def\Orb@i{\ifx\next\bgroup\expandafter\Orb@ii\else\expandafter\Orb@end\fi}%Check brace
-\def\Orb@ii#1{\textstyle\orb_{#1}(\tempa)}%Two args
-\def\Orb@end{\orb(\tempa)}%Single args
-
-\def\Stab#1{\def\tempa{#1}\futurelet\next\Stab@i}% Save first argument
-\def\Stab@i{\ifx\next\bgroup\expandafter\Stab@ii\else\expandafter\Stab@end\fi}%Check brace
-\def\Stab@ii#1{\textstyle\stab_{#1}(\tempa)}%Two args
-\def\Stab@end{\stab(\tempa)}%Single args
-
-\def\CCL#1{\def\tempa{#1}\futurelet\next\CCL@i}% Save first argument
-\def\CCL@i{\ifx\next\bgroup\expandafter\CCL@ii\else\expandafter\CCL@end\fi}%Check brace
-\def\CCL@ii#1{\textstyle\ccl_{#1}(\tempa)}%Two args
-\def\CCL@end{\ccl(\tempa)}%Single args
-
-\def\Centra#1{\def\tempa{#1}\futurelet\next\Centra@i}% Save first argument
-\def\Centra@i{\ifx\next\bgroup\expandafter\Centra@ii\else\expandafter\Centra@end\fi}%Check brace
-\def\Centra@ii#1{\cal{Z}_{#1}(\tempa)}%Two args
-\def\Centra@end{\cal{Z}(\tempa)}%Single args
-
-\newcommand{\Centre}[1]{\cal{Z}(#1)}
-
-\newcommand{\centra}{\cal{Z}}
-\newcommand{\centre}{\cal{Z}}
-\DeclareMathOperator*{\GL}{GL}
-\newcommand{\SL}{\text{SL}}
-\newcommand{\SO}{\text{SO}}
-
-\DeclareMathOperator*{\adj}{adj}
-\newcommand{\Trans}{{\sf{T}}}
 
 \newcommand{\qend}{\hfill $\blacksquare$}
 
@@ -513,19 +471,6 @@ Printed: \today}}
 \newcommand{\glstack}{\begin{array}{c} \geq \\ \leq\end{array}}
 \newcommand{\lgstack}{\begin{array}{c} \leq \\ \geq\end{array}}
 
-% Some Linear Algebra operators
-
-\DeclareMathOperator*{\Mat}{Mat}
-\DeclareMathOperator*{\End}{End}
-\DeclareMathOperator*{\Gr}{Gr}
-\DeclareMathOperator*{\Res}{Res}
-\DeclareMathOperator*{\rk}{rk}
-\DeclareMathOperator*{\Bil}{Bil}
-\DeclareMathOperator*{\Char}{char}
-\DeclareMathOperator*{\sign}{sign}
-\DeclareMathOperator*{\Isom}{Isom}
-\DeclareMathOperator*{\Lin}{\cal{"L}}
-
 \usepackage{listings}
 \lstset{
 	basicstyle=\footnotesize\ttfamily, % Standardschrift
@@ -575,6 +520,8 @@ Printed: \today}}
 \end{tabular}
 \drangarray}
 
+\newcommand{\intinf}{\int_{-\infty}^\infty}
+
 \newcommand{\mnewline}{\\[-5pt] &}
 
 % \newcommand{\mmaticablock}[2]{
@@ -621,3 +568,11 @@ Printed: \today}}
 % {%
 %  \refstepcounter{catamlisting}%
 %   {{\bfseries\sffamily{Listing~\thecatamlisting.}}\relax} #1 {}}
+
+% Indicator functions
+\DeclareMathOperator*{\ind}{1}
+
+\usetikzlibrary{arrows, decorations.markings}
+\newcommand{\bigarrow}{\draw [decoration={markings,mark=at position 1 with {\arrow[scale=2]{>}}},
+    		   postaction={decorate},
+    		   shorten >=0.4pt]}

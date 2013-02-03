@@ -2,7 +2,12 @@ These versions of the `drangreport.sty` and `drangsymbols.sty` are modified vers
 
 These files are mostly used for typing lectures notes in an undergraduate mathematics course. Thus, the symbols and shortcuts are chosen primarily to allow me to write as fast as I can during lectures.
 
-It's a hassle to install fonts and compile with LaTeX, so I use XeLaTeX. This allows me a much wider variety of fonts with minimal effort.
+I compile the files with xelatex. They should work unchanged with pdflatex, but I haven't tried it so I can't be sure.
+
+Alongside the `drangreport` and `drangsymbols` files, I provide several style files that contain subject-specific shortcuts. Currently:
+
+* `awlc-algebra` -- topics in algebra, such as groups, linear maps, and so on. Contains shortcuts for specific groups and subgroups (e.g., orbits, stabilisers, general linear group GL) and some linear operators.
+* `awlc-statistics` -- topics in statistics, such as probability, Markov chains and optimisation. Include shortcuts for probability, expectation and variance. Acronyms (using the `glossaries` package) for statistical terms like random variable (rv) and maximum likelihood estimator (mle).
 
 Large sections of the original code are unchanged; these are mostly superficial edits.
 
