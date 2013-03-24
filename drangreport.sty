@@ -95,7 +95,7 @@
 \DeclareOption{timesopt}{%
   \setcounter{fontset}{3}%        Times fontset with Optima headings
 }
-\DeclareOption{hivizviz}{%
+\DeclareOption{opendyslexic}{%
   \setcounter{fontset}{4}%        Times fontset with Optima headings
 }
 
@@ -132,9 +132,9 @@
   \renewcommand{\ps@headings}{%
     \renewcommand*{\@oddfoot}{}%
     \renewcommand*{\@evenfoot}{}%
-	\renewcommand*{\@oddhead}{\hfill\footnotesize\sffamily{{\itshape{\sectitle}} $\vert$ 
+	\renewcommand*{\@oddhead}{\hfill\footnotesize\sffamily{{{\sectitle}} $\vert$ 
 		\bfseries{\thepage}}} %
-	\renewcommand*{\@evenhead}{\footnotesize\sffamily{{\bfseries{\thepage}} $\vert$ {\itshape{\@shorttitle}} \hfill}} %
+	\renewcommand*{\@evenhead}{\footnotesize\sffamily{{\bfseries{\thepage}} $\vert$ {{\@shorttitle}} \hfill}} %
     % \renewcommand*{\@oddhead}{\normalfont\normalsize\hfill\thepage}%
     % \renewcommand*{\@evenhead}{\normalfont\normalsize\thepage\hfill{\itshape\MakeUppercase{\@shorttitle}}}%
   }%
@@ -143,7 +143,7 @@
     \renewcommand*{\@oddfoot}{}%
     \renewcommand*{\@evenfoot}{}%
     % \renewcommand*{\@oddhead}{\normalfont\normalsize{\itshape\MakeUppercase{\@shorttitle}}\hfill\thepage}%
-	\renewcommand*{\@oddhead}{\hfill\footnotesize\sffamily{{\itshape{\@shorttitle}} $\vert$ \bfseries{\thepage}}}
+	\renewcommand*{\@oddhead}{\hfill\footnotesize\sffamily{{{\@shorttitle}} $\vert$ \bfseries{\thepage}}}
     \renewcommand*{\@evenhead}{\@oddhead}%
   }%
 }
@@ -158,8 +158,8 @@
     \renewcommand{\ps@headings}{%
       \renewcommand*{\@oddfoot}{}%
       \renewcommand*{\@evenfoot}{}%
-  	\renewcommand*{\@oddhead}{\hfill \footnotesize\sffamily{{\itshape{\@shorttitle}} $\vert$ {\bfseries{\thepage}}}} %
-  	\renewcommand*{\@evenhead}{\footnotesize\sffamily{{\bfseries{\thepage}} $\vert$ {\itshape{\@shorttitle}}} \hfill} %
+  	\renewcommand*{\@oddhead}{\hfill \footnotesize\sffamily{\@shorttitle~$\vert$ {\bfseries{\thepage}}}} %
+  	\renewcommand*{\@evenhead}{\footnotesize\sffamily{{\bfseries{\thepage}} $\vert$ \@shorttitle} \hfill} %
       % \renewcommand*{\@oddhead}{\normalfont\normalsize\hfill\thepage}%
       % \renewcommand*{\@evenhead}{\normalfont\normalsize\thepage\hfill{\itshape\MakeUppercase{\@shorttitle}}}%
     }%
@@ -168,7 +168,7 @@
       \renewcommand*{\@oddfoot}{}%
       \renewcommand*{\@evenfoot}{}%
       % \renewcommand*{\@oddhead}{\normalfont\normalsize{\itshape\MakeUppercase{\@shorttitle}}\hfill\thepage}%
-  	  \renewcommand*{\@oddhead}{\hfill\footnotesize\sffamily{{\itshape{\@shorttitle}} $\vert$ \bfseries{\thepage}}} %
+  	  \renewcommand*{\@oddhead}{\hfill\footnotesize\sffamily{\@shorttitle~$\vert$ \bfseries{\thepage}}} %
       \renewcommand*{\@evenhead}{\footnotesize\sffamily{{\bfseries{\thepage}}}} %
     }%
   }
@@ -210,7 +210,7 @@
 	 \setromanfont[Ligatures=TeX]{Caecilia LT Std}
 	 
 	 \setallsansfonts[Ligatures=TeX]{Caecilia LT Std}
-	 \setallmonofonts{Consolas for BBEdit}
+	 \setallmonofonts{Inconsolata-dz}
 	 
 	 \setmathrm[Ligatures=TeX]{Caecilia LT Std}
 	 
@@ -276,15 +276,15 @@
 	 \RequireXeTeX
 	 \usepackage{mathspec}
 	 
-	 \setmainfont[Ligatures=TeX]{FS Me}
+	 \setmainfont[Ligatures=TeX,Scale=.8, LetterSpace=30, WordSpace=2, Mapping=tex-text]{OpenDyslexic}
 	 
 	 % \setmathsfont(Latin,Digits)[Scale=MatchLowercase]{Times} % Scale=MatchLowercase,
 	 
 	 % \setmathsfont(Greek)[Scale=MatchLowercase]{Times} %Scale=MatchLowercase,
 	 
-	 \setromanfont[Ligatures=TeX]{FS Me}
+	 \setromanfont[Ligatures=TeX,Scale=.8, LetterSpace=30, WordSpace=2, Mapping=tex-text]{OpenDyslexic}
 	 
-	 \setsansfont[Ligatures=TeX]{FS Me}
+	 \setsansfont[Ligatures=TeX,Scale=.8, LetterSpace=30, WordSpace=2, Mapping=tex-text]{OpenDyslexic}
 	 \setallmonofonts{Consolas for BBEdit}
 	 
 	 % \setmathrm[Ligatures=TeX,Scale=MatchLowercase]{Times}

@@ -10,33 +10,59 @@
 \newacronym{iid}{iid}{independent identically distributed}
 \newacronym{pdf}{pdf}{probability density function}
 \newacronym{pmf}{pmf}{probability mass function}
-\newacronym{mle}{mle}{maximum likelihood estimator}
+\newacronym{cdf}{cdf}{cumulative density function}
+\newacronym{MLE}{MLE}{maximum likelihood estimator}
 \newacronym{wlln}{WLLN}{Weak Law of Large Numbers}
 \newacronym{slln}{SLLN}{Strong Law of Large Numbers}
 \newacronym{mgf}{mgf}{moment generating function}
 \newacronym{mse}{mse}{mean squared error}
 \newacronym{CI}{CI}{confidence interval}
+\newacronym{LR test}{LR test}{likelihood ratio test}
+\newacronym{NP}{NP}{Neyman-Pearson}
+\newacronym{LR}{LR}{likelihood ratio}
+\newacronym{UMP}{UMP}{universally most powerful}
+\newacronym{MP}{MP}{most powerful}
+\newacronym{BLUE}{BLUE}{best linear unbiased estimator}
+\newacronym{ANOVA}{ANOVA}{analysis of variance}
 
-\DeclareMathOperator*{\mse}{mse}
-\DeclareMathOperator*{\bias}{bias}
+\DeclareMathOperator{\mse}{mse}
+\DeclareMathOperator{\bias}{bias}
+\DeclareMathOperator{\serror}{s.e.}
 
 % List of common distributions
 \DeclareMathOperator*{\Poisson}{Poisson}
-\DeclareMathOperator*{\Norm}{N}
 \DeclareMathOperator*{\Bin}{Bin}
-\DeclareMathOperator*{\Unif}{U}
 \DeclareMathOperator*{\Gammadist}{Gamma}
 \DeclareMathOperator*{\Gammafn}{\Gamma}
+\DeclareMathOperator*{\Betadist}{Beta}
+\DeclareMathOperator*{\Betafn}{\Beta}
 \DeclareMathOperator*{\Exponential}{Exponential}
 \DeclareMathOperator*{\Bernouilli}{Bernouilli}
+\DeclareMathOperator*{\InvGamma}{Inv-Gamma}
+\DeclareMathOperator*{\Multinomial}{Multinomial}
+
+\newcommand{\Normal}{N}
+\newcommand{\Unif}{U}
+\newcommand{\tdist}{t}
+\newcommand{\Fdist}{F}
+
+% \DeclareMathOperator*{\Normal}{N}
+% \DeclareMathOperator*{\Unif}{U}
+% \DeclareMathOperator*{\tdist}{t}
+% \DeclareMathOperator*{\Fdist}{F}
+
+
 
 % Expectation, probability and variance
-\DeclareMathOperator*{\expectation}{\bb{E}}
-\newcommand{\E}{\textstyle\expectation}
+\DeclareMathOperator{\E}{\bb{E}}
+% \newcommand{\E}{\textstyle\expectation}
 
 \let\P\relax
-\DeclareMathOperator*{\probability}{\bb{P}}
-\newcommand{\P}{\textstyle\probability}
+\DeclareMathOperator{\P}{\bb{P}}
+% \newcommand{\P}{\textstyle\probability}
 
-\DeclareMathOperator*{\variation}{\bb{V}ar}
-\newcommand{\Var}{\textstyle\variation}
+\DeclareMathOperator{\Var}{\bb{V}ar}
+% \newcommand{\Var}{\textstyle\variation}
+
+\DeclareMathOperator{\Cov}{\bb{C}ov}
+% \newcommand{\Cov}{\textstyle\covariance}

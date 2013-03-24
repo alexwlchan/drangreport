@@ -3,29 +3,38 @@
 \typeout{Package: `awlc-algebra'}
 
 % Various operators and functions
-\DeclareMathOperator*{\Tr}{tr} % trace
+
+\DeclareMathOperator{\Tr}{tr} % trace
+\newcommand{\trace}{\Tr}
+\newcommand{\Trace}{\Tr}
+
+\DeclareMathOperator{\diag}{diag}
+
 \DeclareMathOperator*{\rank}{rank}
 \DeclareMathOperator*{\sgn}{sgn} % signature
 \DeclareMathOperator*{\hcf}{hcf}
 \DeclareMathOperator*{\lcm}{lcm}
 \DeclareMathOperator*{\adj}{adj} % adjoint
-\newcommand{\Trans}{{\sf{T}}} % transpose
-\DeclareMathOperator*{\Res}{Res} % Residue?
+\newcommand{\Trans}{T} % transpose
+\DeclareMathOperator{\Res}{Res} % Residue?
 \DeclareMathOperator*{\rk}{rk} % rank
-\DeclareMathOperator*{\Bil}{Bil} % bilinear forms
+\DeclareMathOperator*{\Billio}{Bil}
+\newcommand{\Bil}{\textstyle\Billio} % bilinear forms
 \DeclareMathOperator*{\Char}{char} % characteristic
 \DeclareMathOperator*{\sign}{sign} % sign
 
 % Names of different groups
-\DeclareMathOperator*{\Sym}{Sym} % symmetric group
-\DeclareMathOperator*{\GL}{GL} % general linear
-\newcommand{\SL}{\text{SL}} % special linear
-\newcommand{\SO}{\text{SO}} % special orthogonal
-\DeclareMathOperator*{\Mat}{Mat}
-\DeclareMathOperator*{\End}{End}
-\DeclareMathOperator*{\Isom}{Isom} % Isometries
-\DeclareMathOperator*{\Lin}{\cal{L}} % Linear maps
-\DeclareMathOperator*{\Gr}{Gr} % Graussmanian
+\DeclareMathOperator{\Sym}{Sym} % symmetric group
+\DeclareMathOperator{\GL}{GL} % general linear
+\DeclareMathOperator{\SL}{SL} % special linear
+\DeclareMathOperator{\SO}{SO} % special orthogonal
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\End}{End} % endomorphisms
+\DeclareMathOperator{\Isom}{Isom} % Isometries
+\DeclareMathOperator{\Lin}{\cal{L}} % Linear maps
+\DeclareMathOperator{\Gr}{Gr} % Graussmanian
+\DeclareMathOperator{\PSL}{PSL} % Projective special linear group
+\DeclareMathOperator{\PGL}{PGL} % Projective general linear group
 
 % Group operators
 \DeclareMathOperator*{\stab}{stab}

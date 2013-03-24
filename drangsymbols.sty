@@ -55,7 +55,7 @@
         {\strut Theorem~\theequation:~#1};}}%
    }%
    \mdfsetup{linecolor=grey60,%
-   			 skipabove=1.3\parskip,skipbelow=0.5\parskip,
+   			 skipabove=1.7\parskip,skipbelow=0.5\parskip,
              linewidth=2pt,topline=true,
              frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}
    \begin{mdframed}[]\relax%
@@ -207,11 +207,21 @@
 
 % Warnings
 \newenvironment{warning}{%
+	\vspace{-6pt}
 	\begin{trivlist} \item[] \noindent%
 	\begingroup\hangindent=2pc\hangafter=-2
 	\clubpenalty=10000%
 	\hbox to0pt{\hskip-\hangindent\dbend\hfill}\ignorespaces
 	\textit{Warning}.}%
+	{\endgraf\endgroup\end{trivlist}}
+
+\newenvironment{warnings}{%
+	\vspace{-6pt}
+	\begin{trivlist} \item[] \noindent%
+	\begingroup\hangindent=2pc\hangafter=-2
+	\clubpenalty=10000%
+	\hbox to0pt{\hskip-\hangindent\dbend\hfill}\ignorespaces
+	\textit{Warnings}.}%
 	{\endgraf\endgroup\end{trivlist}}
 
 \newcommand{\isin}{\ensuremath{\in}}
@@ -246,7 +256,8 @@
 \newcommand{\del}{\partial}
 \newcommand{\Del}{\nabla}
 
-\newcommand{\powerset}{\MNSpowerset}
+% \newcommand{\powerset}{\MNSpowerset}
+\newcommand{\powerset}{\wp}
 
 \renewcommand{\bf}[1]{\textbf{#1}}
 \renewcommand{\sf}[1]{\ensuremath{\mathsf{#1}}}
@@ -281,6 +292,7 @@
 \newcommand{\iRn}{\in\Rn}
 \newcommand{\iRm}{\in\Rm}
 \newcommand{\iC}{\in\C}
+\newcommand{\iCn}{\in\Cn}
 \newcommand{\iF}{\in\F}
 
 \DeclareMathOperator*{\id}{id}
@@ -326,6 +338,8 @@
 
 \newcommand{\injto}{\hookrightarrow}
 \newcommand{\injfrom}{\hookrightarrow}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
 
 \DeclareMathOperator*{\erf}{erf}
 
@@ -388,8 +402,8 @@
 	\end{flushright}
 	\end{minipage}\vfill
 	
-	#9 \\[0.5cm] %
-	{\large Printed \today.}\\[3cm] %
+	#9 \\[0.3cm] %
+	{Printed \today.}\\[1cm] %
 	
 	\end{center}
 	
@@ -407,9 +421,10 @@
 		{Notes by:}
 		{Alex \textsc{Chan}}
 		{
-			{\large Comments and corrections should be sent to \href{mailto:awlc2@cam.ac.uk}{awlc2@cam.ac.uk}.} \\[0.5cm] %
-			{\large This work is licensed under a \href{http://creativecommons.org/licenses/by-nc-sa/3.0/}{Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License}.} \\[0.5cm] %
-			{\large The following resources are \emph{not} endorsed by the University of Cambridge.}
+			{\ Please send comments and corrections to \href{mailto:awlc2@cam.ac.uk}{awlc2@cam.ac.uk}.} \\[0.3cm]
+			The most recent copy of these notes can be downloaded from \href{http://www.alexwlchan.net/maths}{alexwlchan.net/maths} \\[0.3cm] %
+			{\ These notes are licensed under a \href{http://creativecommons.org/licenses/by-nc-sa/3.0/}{Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License}.} \\[0.3cm] %
+			{\ The following resources are \emph{not} endorsed by the University of Cambridge.}
 		}
 		
 		\thispagestyle{empty}
@@ -432,9 +447,9 @@
 		{Notes by:}
 		{Alex \textsc{Chan}}
 		{
-			{\large Comments and corrections should be sent to \href{mailto:awlc2@cam.ac.uk}{awlc2@cam.ac.uk}.} \\[0.5cm] %
-			{\large This work is licensed under a \href{http://creativecommons.org/licenses/by-nc-sa/3.0/}{Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License}.} \\[0.5cm] %
-			{\large The following resources are \emph{not} endorsed by the University of Cambridge.}
+			{\ Comments and corrections should be sent to \href{mailto:awlc2@cam.ac.uk}{awlc2@cam.ac.uk}.} \\[0.5cm] %
+			{\ This work is licensed under a \href{http://creativecommons.org/licenses/by-nc-sa/3.0/}{Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License}.} \\[0.5cm] %
+			{\ The following resources are \emph{not} endorsed by the University of Cambridge.}
 		}
 		
 		\thispagestyle{empty}
@@ -450,12 +465,13 @@
 
 {\large\bfseries\sffamily{FAO: #3 \\
 From: Alex Chan \\
-Printed: \today}}
+Printed: \today.}}
 
 \thispagestyle{empty}}
 
 \usepackage{marginnote}
-\newcommand{\datemarker}[1]{\marginnote{\textsf{#1}}}
+\newcommand{\datemarker}[1]{\marginnote{\footnotesize{\sffamily{#1}}}}
+\newcommand{\lecturemarker}[2]{\marginnote{\footnotesize{\sffamily{Lecture #1}}}}
 
 \newcommand{\p}{^{\,\prime}}
 \newcommand{\pp}{^{\,\prime\prime}}
@@ -466,6 +482,8 @@ Printed: \today}}
 
 \DeclareMathOperator*{\RHS}{RHS}
 \DeclareMathOperator*{\LHS}{LHS}
+
+\DeclareMathOperator*{\Image}{Im}
 
 % These two commands came from a course in Probability
 \newcommand{\glstack}{\begin{array}{c} \geq \\ \leq\end{array}}
@@ -576,3 +594,15 @@ Printed: \today}}
 \newcommand{\bigarrow}{\draw [decoration={markings,mark=at position 1 with {\arrow[scale=2]{>}}},
     		   postaction={decorate},
     		   shorten >=0.4pt]}
+
+\newcommand{\norm}[1]{\left\Vert #1 \right\Vert}
+\DeclareMathOperator{\Norm}{N}
+
+\newcommand{\ph}{\phantom{-}}
+\newcommand{\shadeblack}{black!25}
+
+\newcommand{\qqand}{\qquad \text{and} \qquad}
+\newcommand{\qqwhere}{\qquad \text{where} \qquad}
+
+\newcommand{\lecturenotesend}{\begin{center} \mbox{} \\[1cm] {\sffamily\bfseries{End of notes}} \end{center}}
+\newcommand{\lecturenotesendshort}{\begin{center} {\sffamily\bfseries{End of notes}} \end{center}}
