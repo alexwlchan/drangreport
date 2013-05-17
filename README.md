@@ -7,6 +7,7 @@ I compile the files with xelatex. They should work unchanged with pdflatex, but 
 Alongside the `drangreport` and `drangsymbols` files, I provide several style files that contain subject-specific shortcuts. Currently:
 
 * `awlc-algebra` -- topics in algebra, such as groups, linear maps, and so on. Contains shortcuts for specific groups and subgroups (e.g., orbits, stabilisers, general linear group GL) and some linear operators.
+* `awlc-listings` -- loads the `listings` package and the particular styles that I like.
 * `awlc-statistics` -- topics in statistics, such as probability, Markov chains and optimisation. Include shortcuts for probability, expectation and variance. Acronyms (using the `glossaries` package) for statistical terms like random variable (rv) and maximum likelihood estimator (mle).
 
 Large sections of the original code are unchanged; these are mostly superficial edits.
