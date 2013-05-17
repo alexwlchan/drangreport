@@ -38,7 +38,7 @@
 \RequirePackage{booktabs,multirow,eukdate}
 
 % Package for font handling
-\RequirePackage{mathspec}
+% \RequirePackage{mathspec}
 
 % Items for handling options
 \newcounter{fontset}
@@ -83,21 +83,6 @@
 %
 % Obviously, these fonts must be available to your LaTeX system for these options to work.
 %
-\DeclareOption{cm}{%
-  \setcounter{fontset}{0}%
-}
-\DeclareOption{caecilia}{%
-  \setcounter{fontset}{1}%        Caecilia fontset with Proxima Nova headings
-}
-\DeclareOption{lyonmeta}{%
-  \setcounter{fontset}{2}%        Lyon fontset with Ideal Sans headings
-}
-\DeclareOption{timesopt}{%
-  \setcounter{fontset}{3}%        Times fontset with Optima headings
-}
-\DeclareOption{opendyslexic}{%
-  \setcounter{fontset}{4}%        Times fontset with Optima headings
-}
 
 % Another option to the package determines whether the (company) logo
 % appears on the title page. By default, the logo does not appear.
@@ -174,12 +159,9 @@
   }
 }
 
-\DeclareOption{lyonmath}{
-  \setmathsfont(Latin,Digits)[Scale=MatchLowercase]{Lyon}
-  \setmathrm[Ligatures=TeX,Scale=MatchLowercase]{Lyon}
-}
 
-\ExecuteOptions{nologo, cm}
+
+\ExecuteOptions{nologo}
 \ProcessOptions
 
 % Handle the fontset option.
@@ -195,120 +177,7 @@
 \addtolength{\oddsidemargin}{-1in}%         to account for TeX's automatic 1in
 \setlength{\evensidemargin}{\oddsidemargin}
 
-\ifthenelse{\value{fontset}=0}
-	{
-	 \renewcommand{\titlefamily}{\sffamily}
-	}
-	{
-	 \ifthenelse{\value{fontset}=1}{%
-	 \RequireXeTeX
-	 \usepackage{mathspec}
-	 
-	 \setmainfont[Ligatures=TeX]{Caecilia LT Std}
-	 \setmathsfont(Latin,Digits)[Scale=MatchLowercase]{Caecilia LT Std}
-	 \setmathsfont(Greek)[Scale=MatchLowercase]{Arev Sans}
-	 \setromanfont[Ligatures=TeX]{Caecilia LT Std}
-	 
-	 \setallsansfonts[Ligatures=TeX]{Caecilia LT Std}
-	 \setallmonofonts{Inconsolata-dz}
-	 
-	 \setmathrm[Ligatures=TeX]{Caecilia LT Std}
-	 
-	 \usepackage{setspace}
-	 \linespread{1.15}
-	 
-	 \renewcommand{\titlefamily}{\sffamily}%   sans serif titles
-	}
-	{
-	 \ifthenelse{\value{fontset}=2}{%
-	 \RequireXeTeX
-	 \usepackage{mathspec}
-	 
-	 \setmainfont[Ligatures=TeX]{Lyon}
-	 
-	 % \setmathsfont(Latin,Digits)[Scale=MatchLowercase]{Lyon} % Scale=MatchLowercase,
-	 
-	 % \setgreekfont[Scale=MatchLowercase]{Gentium Basic} %Scale=MatchLowercase,
- 	 \setmathsfont(Greek)[Scale=MatchLowercase]{Gentium Basic} %Scale=MatchLowercase,
-	 % \setmathsfont(Greek)[Scale=MatchLowercase]{Times} %Scale=MatchLowercase,
-	 % \setmathsfont(Greek)
-	     % [Uppercase=Plain,Lowercase=Regular,Scale=MatchLowercase]
-	     % {GFS Porson}
-	 
-	 \setromanfont[Ligatures=TeX,Scale=MatchLowercase]{Lyon}
-	 
-	 \setsansfont[Ligatures=TeX,Scale=MatchLowercase]{Proxima Nova}
-	 \setallmonofonts[Scale=MatchLowercase]{Consolas for BBEdit}
-	 
-	 % \setmathrm[Ligatures=TeX,Scale=MatchLowercase]{Lyon}
-	 
-	 \setminwhitespace[1250]
-	 
-	 \renewcommand{\titlefamily}{\sffamily}
-	 
-	 \newfontfamily{\ErdSubstFont}{Times}
-	 
-	 \XeTeXinterchartokenstate=1
-	 \newXeTeXintercharclass\ErdSubstFont
-	 
-	 \XeTeXcharclass"0151=\ErdSubstFont
-	 
-	 \XeTeXinterchartoks 0 \ErdSubstFont = {\begingroup\ErdSubstFont}
-	 \XeTeXinterchartoks 255 \ErdSubstFont = {\begingroup\ErdSubstFont}
-	 \XeTeXinterchartoks \ErdSubstFont 0 = {\endgroup}
-	 \XeTeXinterchartoks \ErdSubstFont 255 = {\endgroup}
-	}
-	{%
-	 \ifthenelse{\value{fontset}=3}{%
-	 % \RequirePackage{wrisym}
-	 \renewcommand{\rmdefault}{ptm}
-	 % \usepackage[varg]{txfonts}
-	 \RequirePackage{mathptmx}
-	 
-	 \renewcommand{\sfdefault}{uop}
-	 \renewcommand{\titlefamily}{\sffamily}%  sans serif titles
-	 % \usepackage{sectsty}
-	 % 	  \allsectionsfont{\sffamily}
-	}
-	{%
-	 \ifthenelse{\value{fontset}=4}{%
-	 
-	 \RequireXeTeX
-	 \usepackage{mathspec}
-	 
-	 \setmainfont[Ligatures=TeX,Scale=.8, LetterSpace=30, WordSpace=2, Mapping=tex-text]{OpenDyslexic}
-	 
-	 % \setmathsfont(Latin,Digits)[Scale=MatchLowercase]{Times} % Scale=MatchLowercase,
-	 
-	 % \setmathsfont(Greek)[Scale=MatchLowercase]{Times} %Scale=MatchLowercase,
-	 
-	 \setromanfont[Ligatures=TeX,Scale=.8, LetterSpace=30, WordSpace=2, Mapping=tex-text]{OpenDyslexic}
-	 
-	 \setsansfont[Ligatures=TeX,Scale=.8, LetterSpace=30, WordSpace=2, Mapping=tex-text]{OpenDyslexic}
-	 \setallmonofonts{Consolas for BBEdit}
-	 
-	 % \setmathrm[Ligatures=TeX,Scale=MatchLowercase]{Times}
-	 
-	 \setminwhitespace[1250]
-	 
-	 \usepackage{setspace}
-	 \setstretch{1.1}
-	 
-	 \setlength{\uni@sidemargin}{1.5in}
-	 \setlength{\textwidth}{\paperwidth}
-	 \addtolength{\textwidth}{-2\uni@sidemargin}
-	 \setlength{\oddsidemargin}{\uni@sidemargin}
-	 \addtolength{\oddsidemargin}{-1in}%         to account for TeX's automatic 1in
-	 \setlength{\evensidemargin}{\oddsidemargin}
-	 
-	 }
- 	 {
-      \renewcommand{\sffamily}{}%         serif titles
- 	 }
-	}
-   }
-  }
- }
+
 %
 
 % No extra space after sentence ends.
@@ -374,22 +243,22 @@
   {0pt}%                            indent
   {-3.75ex plus -1ex minus -.2ex}%   pre-skip, next par not indented)
   {2.0ex plus .2ex}%                post-skip
-  {\normalfont\titlefamily\bfseries\LARGE}}
+  {\normalfont\titlefamily\sffamily\bfseries\LARGE}}
 \renewcommand{\subsection}{\@startsection{subsection}{2}%
   {0pt}%                            indent
   {-2.5ex plus -1ex minus -.2ex}%  pre-skip, next par not indented)
   {1.25ex plus .2ex}%                post-skip
-  {\normalfont\titlefamily\bfseries\Large}}
+  {\normalfont\titlefamily\sffamily\bfseries\Large}}
 \renewcommand{\subsubsection}{\@startsection{subsubsection}{3}%
   {0pt}%                            indent
   {-1.25ex plus -1ex minus -.2ex}%  pre-skip, next par not indented)
   {.5ex plus .2ex}%                post-skip
-  {\normalfont\titlefamily\bfseries\large}}
+  {\normalfont\titlefamily\sffamily\bfseries\large}}
 \renewcommand{\paragraph}{\@startsection{paragraph}{4}%
   {0pt}%                            indent
   {-1.25ex plus -1ex minus -.2ex}%  pre-skip, next par not indented)
   {-1em}%                           post-skip, run-in w/ 1 em space
-  {\normalfont\titlefamily\bfseries\normalsize}}
+  {\normalfont\titlefamily  \bfseries\normalsize}}
 \renewcommand{\subparagraph}{\@startsection{subparagraph}{5}%
   {0pt}%                            indent
   {1.25ex plus 1ex minus .2ex}%  pre-skip, next par not indented)
@@ -603,15 +472,19 @@
 }
 %
 % All of my stuff for keeping track of lectures
-\newcommand{\sektion}[1]{\cleardoublepage \section{#1} \gdef\sectitle{#1}
-						 \setcounter{footnote}{0}}
+\makeatletter
+\def\sektion{\@ifnextchar[{\@with}{\@without}}
+\def\@with[#1]#2{\cleardoublepage \section[#1]{#2} \gdef\sectitle{#1}
+             \setcounter{footnote}{0}}
+\def\@without#1{\cleardoublepage \section{#1} \gdef\sectitle{#1}
+             \setcounter{footnote}{0}}
+\makeatother
+
 \newcommand{\sektionu}[1]{\cleardoublepage \section*{#1} \gdef\sectitle{#1}
 						  \addcontentsline{toc}{section}{#1}
 						  \setcounter{footnote}{0}}
 \newcommand{\subsektion}[1]{\subsection*{#1}
 							\addcontentsline{toc}{subsection}{#1}}
-\newcommand{\sekktion}[2]{\newpage \section[#1]{#2} \gdef\sectitle{#1}
-						  \setcounter{footnote}{0}}
 \newcommand{\subsekktion}[2]{\subsection*{#2}
 							 \addcontentsline{toc}{subsection}{#1}}
 \newcommand\sectitle{}		% This is the empty section title, before any section title is set
