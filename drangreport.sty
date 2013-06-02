@@ -29,7 +29,7 @@
 \RequirePackage{mathtools}
 
 % Used for the boxes around theorems and similar
-\RequirePackage{framed}
+% \RequirePackage{framed}
 
 % For annotations in draft files
 % \RequirePackage{todonotes}
@@ -136,6 +136,13 @@
 % An option for my examples sheets, which sets up slightly
 % different numbering styles and different page headings
 \DeclareOption{examples}{%
+
+  % Options for the exam package
+%  \renewcommand{\thequestion}{\em\arabic{question}}
+  %\renewcommand{\solutiontitle}{\em}
+  %\unframedsolutions
+  %\renewcommand{\questionshook}{\em}
+
   \renewcommand{\labelenumi}{\bfseries\sffamily{\arabic{enumi}.}}
   \renewcommand{\labelenumii}{(\roman{enumii})}
   \renewcommand{\labelenumiii}{(\alph{enumiii})}
